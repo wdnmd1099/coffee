@@ -332,13 +332,13 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
           child: bottonViews(context, ETCcontroller).elementAt(_selectedIndex),
         ),
         bottomNavigationBar: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.1,
+          height: MediaQuery.of(context).size.height * 0.07,
           child: GestureDetector(
             onLongPress: () => {},
             child: BottomNavigationBar(
               backgroundColor: Colors.white,
-              selectedLabelStyle: TextStyle(fontSize: 16),
-              unselectedLabelStyle: TextStyle(fontSize: 16),
+              selectedLabelStyle: TextStyle(fontSize: 8),
+              unselectedLabelStyle: TextStyle(fontSize: 8),
               type: BottomNavigationBarType.fixed,
               unselectedItemColor: Colors.grey,
               showUnselectedLabels: true,
