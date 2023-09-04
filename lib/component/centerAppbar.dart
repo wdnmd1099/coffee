@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+
+
 class CenterAppbar extends StatefulWidget {
-  CenterAppbar({Key? key, this.titleName,}) : super(key: key);
-  String? titleName;
+  CenterAppbar({Key? key, required this.titleName,}) : super(key: key);
+  String titleName;
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -17,7 +19,7 @@ class _MyHomePageState extends State<CenterAppbar> {
       shadowColor: Colors.transparent,
       centerTitle: true,
       title: Text(
-        widget.titleName!,
+        widget.titleName,
         style: TextStyle(fontSize: 14, color: Colors.black,fontWeight: FontWeight.bold,),
       ),
       actions: <Widget>[

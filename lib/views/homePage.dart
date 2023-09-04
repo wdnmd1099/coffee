@@ -13,6 +13,7 @@ class _MyHomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
+
     return   Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(maxHeight * 0.05), //Appbar高度
@@ -28,7 +29,7 @@ class _MyHomePageState extends State<HomePage> {
                   padding:
                   EdgeInsets.only(left: 8, top: 8, right: 4, bottom: 8),
                   width: maxWidth / 2,
-                  height: maxWidth / 2.4,
+                  height: maxHeight / 4.5,
                   child: Container(
                     color: Color.fromRGBO(158, 158, 158, 0.2),
                     child: Column(
@@ -38,11 +39,11 @@ class _MyHomePageState extends State<HomePage> {
                           // color: Colors.green,
                           child: Icon(
                             Icons.lock,
-                            size: 70,
+                            size: maxHeight * 0.1,
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.only(top: 0),
+                          padding: EdgeInsets.only(top: maxHeight * 0.01),
                           // color: Colors.yellow,
                           child: Text(
                             '门店自取',
@@ -50,9 +51,7 @@ class _MyHomePageState extends State<HomePage> {
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.only(
-                            top: 4,
-                          ),
+                          padding: EdgeInsets.only(top: maxHeight * 0.01),
                           // color: Colors.purple,
                           child: Text(
                             'PICK UP',
@@ -67,7 +66,7 @@ class _MyHomePageState extends State<HomePage> {
                   padding:
                   EdgeInsets.only(left: 8, top: 8, right: 4, bottom: 8),
                   width: maxWidth / 2,
-                  height: maxWidth / 2.4,
+                  height: maxHeight / 4.5,
                   child: Container(
                     color: Color.fromRGBO(158, 158, 158, 0.2),
                     child: Column(
@@ -77,11 +76,11 @@ class _MyHomePageState extends State<HomePage> {
                           // color: Colors.green,
                           child: Icon(
                             Icons.priority_high,
-                            size: 70,
+                            size: maxHeight * 0.1,
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.only(top: 0),
+                          padding: EdgeInsets.only(top: maxHeight * 0.01),
                           // color: Colors.yellow,
                           child: Text(
                             '充值优惠',
@@ -89,9 +88,7 @@ class _MyHomePageState extends State<HomePage> {
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.only(
-                            top: 4,
-                          ),
+                          padding: EdgeInsets.only(top: maxHeight * 0.01),
                           // color: Colors.purple,
                           child: Text(
                             'DEPOSIT',
@@ -129,7 +126,9 @@ class _MyHomePageState extends State<HomePage> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.only(left: maxWidth * 0.25),
+                      padding: EdgeInsets.only(
+                          left: maxWidth <= 345? maxWidth* 0.1 :  maxWidth* 0.25
+                      ),
                       child: Text(
                         '江门新会第一店',
                         style: TextStyle(fontSize: 12),
