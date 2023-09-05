@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:coffee/component/takeFoodCardList.dart';
 import '../component/centerAppbar.dart';
@@ -35,6 +38,7 @@ class _TakeFoodState extends State<TakeFood> {
   ] ;
   @override
   Widget build(BuildContext context) {
+    TakeFoodPageToGetData();
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -54,3 +58,86 @@ class _TakeFoodState extends State<TakeFood> {
     );
   }
 }
+
+
+
+
+
+
+
+
+class TakeFoodObj {
+    String Id;
+    String? ShopCode;      //店铺编码
+    double? Page;      //分页码
+    double? PageSize;      //分页大小
+
+
+    TakeFoodObj({required this.Id,this.ShopCode,this.Page,this.PageSize}){}
+
+    factory TakeFoodObj.fromJson(Map<String, dynamic> json) {
+      return TakeFoodObj(
+        Id: json['Id'],
+        ShopCode: json['ShopCode'],
+        Page: json['Page'],
+        PageSize: json['PageSize'],
+      );
+    }
+
+    Map<String,dynamic> toJson(){
+      return {
+        'Id':Id,
+        'ShopCode':ShopCode,
+        'Page':Page,
+        'PageSize':PageSize,
+      };
+    }
+}
+
+TakeFoodPageToGetData() async {
+  // getToken();
+  String? token = await getToken();
+
+  TakeFoodObj take = new TakeFoodObj(Id: '20230630-000002',ShopCode: 's001',Page: 1,PageSize: 20,);
+  String jsonString1 = jsonEncode(take.toJson());
+  var url = Uri.parse('http://192.168.0.3:31000/RcApp/V1/Order/Select');
+  var headers = {
+    'Content-Type': 'application/json',
+    'X-API-TOKEN':token!,
+  };
+
+  var response = await http.post(
+    url,
+    headers: headers,
+    body: jsonString1,
+  );
+
+
+  // Map<String,dynamic> takeJsonString = take.toJson();
+  // print(response.body);
+  // print(jsonString1);
+}
+
+
+
+Future<String?> getToken() async {
+  final storage = FlutterSecureStorage();
+  var x =  await storage.read(key: 'userToken');
+  // print('${x},来了');
+  // sentToken(x!);
+  return x;
+}
+
+String sentToken(String xxx){
+  return xxx;
+}
+
+
+
+
+
+
+
+
+
+

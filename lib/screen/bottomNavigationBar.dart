@@ -2,6 +2,7 @@ import 'package:coffee/views/takeFoodPage.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee/views/homePage.dart';
 import 'package:coffee/views/orderPage.dart';
+import 'package:coffee/views/MyUserPage.dart';
 import 'package:coffee/views/takeFoodPage.dart';
 
 
@@ -14,7 +15,7 @@ class bottomNavigationBar extends StatefulWidget {
 }
 
 class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
-  int _selectedIndex = 2;
+  int _selectedIndex =4;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
@@ -33,10 +34,7 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
         'Index 2: School',
         style: optionStyle,
       ),
-      Text(
-        'Index 2: School',
-        style: optionStyle,
-      ),
+      MyUserPage(),
     ];
     return widgetOptions;
   }

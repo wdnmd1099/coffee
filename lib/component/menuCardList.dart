@@ -17,7 +17,7 @@ class _MenuCardListState extends State<MenuCardList> {
       itemCount: widget.meun.length,
       itemBuilder: (BuildContext context, int index) {
         var item = widget.meun[index];
-        var inside = item['inside'];
+        var children = item['Children'];
         return Column(
           children: [
             // Text('种类: ${item['种类']}'),
@@ -38,7 +38,7 @@ class _MenuCardListState extends State<MenuCardList> {
                         ),
                       ),
                       Text(
-                        item['种类'],
+                        item['Name'],
                         style: TextStyle(color: Colors.grey),
                       ),
                     ],
@@ -60,9 +60,9 @@ class _MenuCardListState extends State<MenuCardList> {
             ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemCount: inside.length,
-              itemBuilder: (BuildContext context, int insideIndex) {
-                var insideItem = inside[insideIndex];
+              itemCount: children.length,
+              itemBuilder: (BuildContext context, int childrenIndex) {
+                var childrenItem = children[childrenIndex];
 
                 return Container(
                   padding:
@@ -116,7 +116,7 @@ class _MenuCardListState extends State<MenuCardList> {
                                     top: 8,
                                   ),
                                   child: Text(
-                                    insideItem['名字'],
+                                    childrenItem['Name'],
                                     style: TextStyle(
                                         fontSize: 16,
                                         overflow:
@@ -129,7 +129,7 @@ class _MenuCardListState extends State<MenuCardList> {
                                   child: Container(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                      insideItem['描述'],
+                                      '${childrenItem['SimpleDesc'].replaceAll(RegExp(r'(\n|\r)$'), '').toString()}',
                                       style: TextStyle(
                                         overflow:
                                         TextOverflow.ellipsis,
@@ -156,9 +156,9 @@ class _MenuCardListState extends State<MenuCardList> {
                                         ),
                                       ),
                                       Text(
-                                        '${insideItem['售价']}',
+                                        '${childrenItem['Price']}',
                                         style:
-                                        TextStyle(fontSize: 16),
+                                        TextStyle(fontSize: 16,overflow: TextOverflow.ellipsis),
                                       ),
                                       Expanded(
                                         child: Container(
