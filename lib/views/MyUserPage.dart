@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-
 class MyUserPage extends StatefulWidget {
   const MyUserPage({super.key});
 
@@ -16,6 +15,7 @@ class _BottomNavigationBarExampleState extends State<MyUserPage> {
   int _phoneNumber = 0;
   int _smsCode = 0;
   String showToken = '';
+
   @override
   Widget build(BuildContext context) {
     double maxHeight = MediaQuery.of(context).size.height;
@@ -26,46 +26,82 @@ class _BottomNavigationBarExampleState extends State<MyUserPage> {
           Text(_phoneNumber.toString()),
           Text(_smsCode.toString()),
           Text(showToken),
-          TextFormField(
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly, //限制只能输入数字
-              LengthLimitingTextInputFormatter(11), //限制只能输入11位数，以匹配手机号码
-            ],
-            keyboardType: TextInputType.phone,
-            decoration: InputDecoration(
-              labelText: 'Phone Number',
+          Container(
+            width: maxWidth * 0.9,
+            child: TextFormField(
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly, //限制只能输入数字
+                LengthLimitingTextInputFormatter(11), //限制只能输入11位数，以匹配手机号码
+              ],
+              keyboardType: TextInputType.phone,
+              decoration: InputDecoration(
+                labelText: 'Phone Number',
+              ),
+              onChanged: (value) {
+                // print(value.length);
+                setState(
+                  () {
+                    _phoneNumber = int.tryParse(value)!;
+                  },
+                );
+              },
             ),
-            onChanged: (value) {
-              // print(value.length);
-              setState(
-                () {
-                  _phoneNumber = int.tryParse(value)!;
-                },
-              );
-            },
           ),
-          TextFormField(
-            inputFormatters: [
-              FilteringTextInputFormatter.digitsOnly, //限制只能输入数字
-              LengthLimitingTextInputFormatter(6), //限制只能输入11位数，以匹配手机号码
-            ],
-            keyboardType: TextInputType.phone,
-            decoration: InputDecoration(
-              labelText: 'SMS verification code',
+          Container(
+            width: maxWidth * 0.9,
+            child: TextFormField(
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly, //限制只能输入数字
+                LengthLimitingTextInputFormatter(6), //限制只能输入11位数，以匹配手机号码
+              ],
+              keyboardType: TextInputType.phone,
+              decoration: InputDecoration(
+                labelText: 'SMS verification code',
+              ),
+              onChanged: (value) {
+                setState(
+                  () {
+                    _smsCode = int.tryParse(value)!;
+                  },
+                );
+              },
             ),
-            onChanged: (value) {
-              setState(
-                () {_smsCode = int.tryParse(value)!;},
-              );
-            },
           ),
-          Center(
+          Container(
+            padding: EdgeInsets.only(top: 20),
+            // color: Colors.red,
             child: Row(
               children: [
-                ElevatedButton(onPressed: ()=>{getSMSCode(_phoneNumber)}, child: Text('get code')),
-                ElevatedButton(onPressed: () => {
-                  signIn(_phoneNumber,_smsCode,showToken)
-                }, child: Text('sign')),
+                Container(
+                  width: maxWidth * 0.5,
+                  child:
+                  Center(
+                    child:
+                      Container(
+                        width: maxWidth * 0.3,
+                        child:  ElevatedButton(
+                            onPressed: () => {getSMSCode(_phoneNumber)},
+                            child: Text('get code')),
+                      ),
+
+                  ),
+                ),
+               Container(
+                 width: maxWidth * 0.5,
+                 child:
+                 Center(
+                   child:
+                     Container(
+                       width: maxWidth * 0.3,
+                       child:  ElevatedButton(
+                           onPressed: () =>
+                           {signIn(_phoneNumber, _smsCode, showToken)},
+                           child: Text('sign')),
+                     ),
+
+                 ),
+               ),
+
               ],
             ),
           ),
@@ -75,21 +111,18 @@ class _BottomNavigationBarExampleState extends State<MyUserPage> {
   }
 }
 
-
-
-
-class GetCode{
+class GetCode {
   String phoneNumberCountryCode = '86';
   String phoneNumber;
   String? smsCode;
 
-  GetCode({required this.phoneNumber,this.smsCode}){}
+  GetCode({required this.phoneNumber, this.smsCode}) {}
 
   Map<String, dynamic> toJson() {
     return {
-      'CountryCode':phoneNumberCountryCode,
+      'CountryCode': phoneNumberCountryCode,
       'PhoneNumber': phoneNumber,
-      'AuthCode':smsCode,
+      'AuthCode': smsCode,
     };
   }
 }
@@ -98,7 +131,8 @@ Future<dynamic> getSMSCode(_phoneNumber) async {
   GetCode gc = new GetCode(phoneNumber: _phoneNumber.toString());
   String gcStr = jsonEncode(gc.toJson());
   print(gcStr);
-  var url = Uri.parse('http://192.168.0.3:31000/RcApp/V1/Portal/AuthCodeForLoginByPhoneNumber');
+  var url = Uri.parse(
+      'http://192.168.0.3:31000/RcApp/V1/Portal/AuthCodeForLoginByPhoneNumber');
   var headers = {
     'Content-Type': 'application/json',
   };
@@ -113,11 +147,13 @@ Future<dynamic> getSMSCode(_phoneNumber) async {
   // print(response.body);
 }
 
-Future<dynamic> signIn(_phoneNumber,_smsCode,showToken) async {
-  GetCode sI = new GetCode(phoneNumber: _phoneNumber.toString(),smsCode: _smsCode.toString());
+Future<dynamic> signIn(_phoneNumber, _smsCode, showToken) async {
+  GetCode sI = new GetCode(
+      phoneNumber: _phoneNumber.toString(), smsCode: _smsCode.toString());
   String sIStr = jsonEncode(sI.toJson());
   print(sIStr);
-  var url = Uri.parse('http://192.168.0.3:31000/RcApp/V1/Portal/LoginByPhoneNumberWithAuthCode');
+  var url = Uri.parse(
+      'http://192.168.0.3:31000/RcApp/V1/Portal/LoginByPhoneNumberWithAuthCode');
   var headers = {
     'Content-Type': 'application/json',
   };
@@ -131,12 +167,13 @@ Future<dynamic> signIn(_phoneNumber,_smsCode,showToken) async {
 
   // print(response.body);
 
-  Map<String,dynamic> token = jsonDecode(response.body);
+  Map<String, dynamic> token = jsonDecode(response.body);
   print(token['Data']['Token']);
   saveToken(token['Data']['Token']);
   String? userToken = await getToken();
- return userToken;
+  return userToken;
 }
+
 // 保存Token
 Future<void> saveToken(String token) async {
   final storage = FlutterSecureStorage();
@@ -149,23 +186,3 @@ Future<String?> getToken() async {
   await storage.read(key: 'userToken');
   return await storage.read(key: 'userToken');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

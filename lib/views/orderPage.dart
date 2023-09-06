@@ -43,11 +43,11 @@ class _MyHomePageState extends State<OrderPage> {
   Widget build(BuildContext context) {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
-    var c1 = xxx();
+    var c1 = postDataToGetMenu();
     // print(c1);
 
     return FutureBuilder<List>(
-      future: xxx(),
+      future: postDataToGetMenu(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // 请求还在进行中
@@ -58,10 +58,10 @@ class _MyHomePageState extends State<OrderPage> {
           return Text('发生错误: ${snapshot.error}');
         } else {
           // 请求成功完成
-          List v1 = [];
+          List menuData = [];
           if (snapshot.data!.length > 0) {
             // print(snapshot.data?.length);
-            v1 = snapshot.data!;
+            menuData = snapshot.data!;
           }
           return Scaffold(
             appBar: PreferredSize(
@@ -78,7 +78,7 @@ class _MyHomePageState extends State<OrderPage> {
                       color: Colors.grey[200],
                       width: maxWidth,
                       child: MenuCardList(
-                        meun: v1,
+                        meun: menuData,
                       ),
                     ),
                   ),
@@ -116,7 +116,7 @@ class Shop {
   }
 }
 
-Future<List> xxx() async {
+Future<List> postDataToGetMenu() async {
   //创建对象
   Shop shop = Shop(shopD: 'S001');
   // print(shop);

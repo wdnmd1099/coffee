@@ -96,6 +96,7 @@ class TakeFoodObj {
 
 TakeFoodPageToGetData() async {
   // getToken();
+  print('取餐');
   String? token = await getToken();
 
   TakeFoodObj take = new TakeFoodObj(Id: '20230630-000002',ShopCode: 's001',Page: 1,PageSize: 20,);
@@ -123,8 +124,8 @@ TakeFoodPageToGetData() async {
 Future<String?> getToken() async {
   final storage = FlutterSecureStorage();
   var x =  await storage.read(key: 'userToken');
-  // print('${x},来了');
-  // sentToken(x!);
+  print('${x},来了');
+  sentToken(x!);
   return x;
 }
 

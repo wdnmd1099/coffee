@@ -5,7 +5,6 @@ import 'package:coffee/views/orderPage.dart';
 import 'package:coffee/views/MyUserPage.dart';
 import 'package:coffee/views/takeFoodPage.dart';
 
-
 class bottomNavigationBar extends StatefulWidget {
   const bottomNavigationBar({super.key});
 
@@ -15,7 +14,7 @@ class bottomNavigationBar extends StatefulWidget {
 }
 
 class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
-  int _selectedIndex =4;
+  int _selectedIndex = 4;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
@@ -24,7 +23,7 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
     double maxWidth = MediaQuery.of(context).size.width;
 
     List<Widget> widgetOptions = <Widget>[
-      HomePage(),//首页
+      HomePage(), //首页
 
       OrderPage(),
 
@@ -39,6 +38,20 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
     return widgetOptions;
   }
 
+  List<Widget> widgetOptions = <Widget>[
+    HomePage(), //首页
+
+    OrderPage(),
+
+    TakeFood(),
+
+    Text(
+      'Index 2: School',
+      style: optionStyle,
+    ),
+    MyUserPage(),
+  ];
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -52,6 +65,9 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
   Widget build(BuildContext context) {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
+
+    bool refresh = true;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -60,10 +76,15 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
           splashColor: Color.fromRGBO(0, 0, 0, 0)),
       home: Scaffold(
         body: Center(
-          child: bottonViews(context, ETCcontroller).elementAt(_selectedIndex),
+          child: refresh == true
+              ? bottonViews(context, ETCcontroller).elementAt(_selectedIndex) //会刷新页面
+              : IndexedStack(  //不会刷新页面
+                  index: _selectedIndex,
+                  children: widgetOptions,
+                ),
         ),
         bottomNavigationBar: SizedBox(
-          height: maxHeight <= 560 ?  maxHeight * 0.15  : maxHeight * 0.08,
+          height: maxHeight <= 560 ? maxHeight * 0.15 : maxHeight * 0.08,
           child: GestureDetector(
             onLongPress: () => {},
             child: BottomNavigationBar(
