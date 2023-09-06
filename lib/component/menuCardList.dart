@@ -1,14 +1,32 @@
 import 'package:flutter/material.dart';
+import 'maskDialog.dart';
+
 
 class MenuCardList extends StatefulWidget {
-  const MenuCardList({super.key,required this.meun});
+  const MenuCardList({super.key, required this.meun});
+
   final List meun;
+
   @override
-  State<MenuCardList> createState() =>
-      _MenuCardListState();
+  State<MenuCardList> createState() => _MenuCardListState();
 }
 
 class _MenuCardListState extends State<MenuCardList> {
+  bool _visible = false;
+
+  void initState() {
+    super.initState();
+    // 延迟一段时间后显示对话框的淡入效果
+    setState(() {
+      _visible = true;
+    });
+    // Future.delayed().then((value) {
+    //   setState(() {
+    //     _visible = true;
+    //   });
+    // });
+  }
+
   @override
   Widget build(BuildContext context) {
     double maxHeight = MediaQuery.of(context).size.height;
@@ -48,9 +66,8 @@ class _MenuCardListState extends State<MenuCardList> {
                     height: 0.25,
                     child: Container(
                       decoration: BoxDecoration(
-                        // color: Colors.purple,
-                          border: Border.all(
-                              color: Colors.grey, width: 0.25)),
+                          // color: Colors.purple,
+                          border: Border.all(color: Colors.grey, width: 0.25)),
                     ),
                   ),
                 ],
@@ -65,8 +82,7 @@ class _MenuCardListState extends State<MenuCardList> {
                 var childrenItem = children[childrenIndex];
 
                 return Container(
-                  padding:
-                  EdgeInsets.only(left: 8, right: 8, bottom: 8),
+                  padding: EdgeInsets.only(left: 8, right: 8, bottom: 8),
                   child: Container(
                     height: 100,
                     width: maxWidth,
@@ -101,8 +117,7 @@ class _MenuCardListState extends State<MenuCardList> {
                           ), //产品图
                         ), //产品图
                         Container(
-                          padding:
-                          EdgeInsets.only(left: maxWidth * 0.1),
+                          padding: EdgeInsets.only(left: maxWidth * 0.1),
                           child: Container(
                             alignment: Alignment.centerLeft,
                             // color: Colors.purple,
@@ -119,20 +134,17 @@ class _MenuCardListState extends State<MenuCardList> {
                                     childrenItem['Name'],
                                     style: TextStyle(
                                         fontSize: 16,
-                                        overflow:
-                                        TextOverflow.ellipsis),
+                                        overflow: TextOverflow.ellipsis),
                                   ),
                                 ),
                                 Container(
-                                  padding:
-                                  EdgeInsets.only(bottom: 8),
+                                  padding: EdgeInsets.only(bottom: 8),
                                   child: Container(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
                                       '${childrenItem['SimpleDesc'].replaceAll(RegExp(r'(\n|\r)$'), '').toString()}',
                                       style: TextStyle(
-                                        overflow:
-                                        TextOverflow.ellipsis,
+                                        overflow: TextOverflow.ellipsis,
                                         fontSize: 8,
                                         letterSpacing: 0.3,
                                       ),
@@ -147,18 +159,17 @@ class _MenuCardListState extends State<MenuCardList> {
                                       Container(
                                         // padding: EdgeInsets.only(bottom: 10),
                                         height: 14,
-                                        alignment:
-                                        Alignment.bottomLeft,
+                                        alignment: Alignment.bottomLeft,
                                         child: Text(
                                           '￥',
-                                          style: TextStyle(
-                                              fontSize: 8),
+                                          style: TextStyle(fontSize: 8),
                                         ),
                                       ),
                                       Text(
                                         '${childrenItem['Price']}',
-                                        style:
-                                        TextStyle(fontSize: 16,overflow: TextOverflow.ellipsis),
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            overflow: TextOverflow.ellipsis),
                                       ),
                                       Expanded(
                                         child: Container(
@@ -166,32 +177,28 @@ class _MenuCardListState extends State<MenuCardList> {
                                           // width: 10,
                                           // alignment: Alignment.centerRight,
                                           child: Container(
-                                            alignment: Alignment
-                                                .centerRight,
+                                            alignment: Alignment.centerRight,
                                             // color: Colors.white,
-                                            child: Container(
-                                              width: maxWidth * 0.1,
-                                              // color: Colors.yellow,
-                                              decoration:
-                                              BoxDecoration(
-                                                color:
-                                                Color.fromRGBO(
-                                                    119,
-                                                    185,
-                                                    144,
-                                                    1),
-                                                borderRadius:
-                                                BorderRadius
-                                                    .circular(
-                                                    4),
-                                              ),
-                                              child: Center(
-                                                child: Text(
-                                                  '选配',
-                                                  style: TextStyle(
-                                                      fontSize: 8),
+
+                                            child: DialogWidget(
+                                              wrapper:Container(
+                                                width: maxWidth * 0.1,
+                                                // color: Colors.yellow,
+                                                decoration: BoxDecoration(
+                                                  color: Color.fromRGBO(
+                                                      119, 185, 144, 1),
+                                                  borderRadius:
+                                                  BorderRadius.circular(4),
+                                                ),
+                                                child: Center(
+                                                  child: const Text(
+                                                    '选配',
+                                                    style: TextStyle(
+                                                        fontSize: 8),
+                                                  ),
                                                 ),
                                               ),
+                                              dialogWidget:const Text('这是一个对话框'),
                                             ),
                                           ),
                                         ),
@@ -215,7 +222,10 @@ class _MenuCardListState extends State<MenuCardList> {
                                   Container(
                                     width: maxWidth * 0.1,
                                     alignment: Alignment.center,
-                                    child:   Text('--',style: TextStyle(fontSize: 28,)),
+                                    child: Text('--',
+                                        style: TextStyle(
+                                          fontSize: 28,
+                                        )),
                                     // color: Colors.red,
                                   ),
                                   Container(
@@ -223,25 +233,32 @@ class _MenuCardListState extends State<MenuCardList> {
                                     alignment: Alignment.center,
                                     width: maxWidth * 0.1,
                                     // color: Colors.purple,
-                                    child:  Text('已售：',style: TextStyle(fontSize: 8),),
+                                    child: Text(
+                                      '已售：',
+                                      style: TextStyle(fontSize: 8),
+                                    ),
                                   ),
                                   Container(
                                     padding: EdgeInsets.only(left: 6),
                                     alignment: Alignment.center,
                                     width: maxWidth * 0.1,
                                     // color: Colors.yellow  ,
-                                    child:  Text('评分：',style: TextStyle(fontSize: 8),),
+                                    child: Text(
+                                      '评分：',
+                                      style: TextStyle(fontSize: 8),
+                                    ),
                                   ),
                                   Container(
                                     alignment: Alignment.center,
                                     width: maxWidth * 0.1,
                                     // color: Colors.red,
-                                    child: Text('--',style: TextStyle(fontSize: 28,),),
+                                    child: Text(
+                                      '--',
+                                      style: TextStyle(
+                                        fontSize: 28,
+                                      ),
+                                    ),
                                   ),
-
-
-
-
                                 ],
                               ),
                             ),

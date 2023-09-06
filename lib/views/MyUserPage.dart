@@ -1,8 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyUserPage extends StatefulWidget {
   const MyUserPage({super.key});
@@ -14,7 +15,7 @@ class MyUserPage extends StatefulWidget {
 class _BottomNavigationBarExampleState extends State<MyUserPage> {
   int _phoneNumber = 0;
   int _smsCode = 0;
-  String showToken = '';
+  String showToken = 'xxx';
 
   @override
   Widget build(BuildContext context) {
@@ -105,11 +106,26 @@ class _BottomNavigationBarExampleState extends State<MyUserPage> {
               ],
             ),
           ),
+          ElevatedButton(onPressed: ()async=>{
+            showToken = (await tok(showToken))!
+
+          }, child: Text('获取token'),)
         ],
       ),
     );
   }
 }
+
+ Future<String?> tok (String showToken) async {
+  var x = await getToken();
+
+  if(x != null){ print('${x},同步获取token'); return x;}
+  else {
+    print('x 不存在,,, ${x}');
+  }
+
+}
+
 
 class GetCode {
   String phoneNumberCountryCode = '86';
@@ -168,21 +184,37 @@ Future<dynamic> signIn(_phoneNumber, _smsCode, showToken) async {
   // print(response.body);
 
   Map<String, dynamic> token = jsonDecode(response.body);
-  print(token['Data']['Token']);
+  // print(token['Data']['Token']);
   saveToken(token['Data']['Token']);
   String? userToken = await getToken();
-  return userToken;
+
+  Future.delayed(Duration(milliseconds: 250), () {
+    // 在这里定义需要延迟执行的操作
+    // print('${userToken},方案欸获取token');
+    // showToken = userToken;
+  });
+
+
+
+
+
+  // return userToken;
 }
 
-// 保存Token
-Future<void> saveToken(String token) async {
-  final storage = FlutterSecureStorage();
-  await storage.write(key: 'userToken', value: token);
+
+
+
+//保存Token
+void saveToken(String token) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('userToken', token);
+  print('${token},保存token');
+  // await storage.write(key: 'userToken', value: token);
 }
 
 // 获取Token
 Future<String?> getToken() async {
-  final storage = FlutterSecureStorage();
-  await storage.read(key: 'userToken');
-  return await storage.read(key: 'userToken');
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  final String? userToken = prefs.getString('userToken');
+  return userToken;
 }
