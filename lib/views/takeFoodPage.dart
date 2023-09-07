@@ -39,23 +39,45 @@ class _TakeFoodState extends State<TakeFood> {
   // ] ;
   @override
   Widget build(BuildContext context) {
-    List data =  TakeFoodPageToGetData();
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(maxHeight * 0.05), //Appbar高度
-        child: CenterAppbar(
-          titleName: '取餐',
-        ),
-      ),
-      body: Container(
-        padding: EdgeInsets.only(top: 12),
-        // height: maxHeight,
-        // width: maxWidth,
-        color: Colors.grey[200],
-        child: TakeFoodCard(takeFoodData: data,),
-      ),
+
+     print(getToken());
+    return FutureBuilder<List<dynamic>> (
+      future: takeFoodPageToGetData(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          // 请求还在进行中
+          print('进行中');
+          return CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          // 请求发生错误
+          return Text('发生错误: ${snapshot.error}');
+        } else {
+          // 请求成功完成
+          List orderData = [];
+          if (snapshot.data!.length > 0) {
+            orderData = snapshot.data!;
+            return Scaffold(
+              appBar: PreferredSize(
+                preferredSize: Size.fromHeight(maxHeight * 0.05), //Appbar高度
+                child: CenterAppbar(
+                  titleName: '取餐',
+                ),
+              ),
+              body: Container(
+                padding: EdgeInsets.only(top: 12),
+                // height: maxHeight,
+                // width: maxWidth,
+                color: Colors.grey[200],
+                child: TakeFoodCard(takeFoodData: orderData,),
+              ),
+            );
+          }else{
+            return Text('请先登录');
+          }
+        }
+      },
     );
   }
 }
@@ -86,39 +108,38 @@ class TakeFoodObj {
     }
 }
 
-TakeFoodPageToGetData() async {
-  String? token = await getToken();
-  // print('取餐');
-  // String? token = await getToken();
 
+Future<List>  takeFoodPageToGetData() async {
+  print('这是取餐页的方法被调用了');
   TakeFoodObj take = new TakeFoodObj(ShopCode: 's001',Page: 1,PageSize: 20,);
   String jsonString1 = jsonEncode(take.toJson());
   var url = Uri.parse('http://192.168.0.3:31000/RcApp/V1/Order/Select');
   var headers;
+
+  String? token = await getToken();
   if(token != null){
     headers = {
       'Content-Type': 'application/json',
       'X-API-TOKEN':token,
     };
-  }else{
-    print('token null 了');
-  }
-
     var response = await http.post(
       url,
       headers: headers,
       body: jsonString1,
     );
+    //序列化获得的订单，有订单数count，但目前测试数量不多，如有多页逻辑再写
+    Map<String, dynamic> jsonMap = json.decode(response.body);
+    //有数量和订单 {数量：XXX，订单：【xxxxxxx】}
+    // Map orderData = jsonMap['Data'];
+    //订单列表
+    List<dynamic> orderData = jsonMap['Data']['Data'];
+    // print(orderData);
 
-  //序列化获得的订单，有订单数count，但目前测试数量不多，如有多页逻辑再写
-  Map<String, dynamic> jsonMap = json.decode(response.body);
-  //有数量和订单 {数量：XXX，订单：【xxxxxxx】}
-  // Map orderData = jsonMap['Data'];
-  //订单列表
-  List orderData = jsonMap['Data']['Data'];
-  print(orderData);
-
-  return orderData;
+    return orderData;
+  }else{
+    print('token null 了');
+    return [];
+  }
 }
 
 
