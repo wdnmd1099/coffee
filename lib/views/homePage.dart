@@ -163,7 +163,7 @@ class _MyHomePageState extends State<HomePage> {
                               // color:Colors.yellow,
                               padding: EdgeInsets.only(left: 4),
                               // height: maxWidth * 0.07,
-                              child: Text(
+                              child: const Text(
                                 '切换',
                                 style: TextStyle(fontSize: 12),
                               ),
@@ -201,12 +201,12 @@ class _MyHomePageState extends State<HomePage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 16),
+              padding: const EdgeInsets.only(top: 16),
               child: Container(
                 width: maxWidth,
                 height: maxHeight * 0.06,
-                color: Color.fromRGBO(239, 199, 110,0.5),
-                child: Center(
+                color: const Color.fromRGBO(239, 199, 110,0.5),
+                child: const Center(
                   child: Text(
                     '24H 有电就能做',
                     style: TextStyle(fontSize: 12),

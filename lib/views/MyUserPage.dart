@@ -99,8 +99,7 @@ class _BottomNavigationBarExampleState extends State<MyUserPage> {
                      Container(
                        width: maxWidth * 0.3,
                        child:  ElevatedButton(
-                           onPressed: () =>
-                           {signIn(_phoneNumber, _smsCode, authProvider)},
+                           onPressed: () => {signIn(_phoneNumber, _smsCode, authProvider)},
                            child: Text('sign')),
                      ),
 
