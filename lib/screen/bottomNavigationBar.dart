@@ -66,7 +66,7 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
 
-    bool refresh = true;
+    bool refresh = false;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

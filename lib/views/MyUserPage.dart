@@ -3,7 +3,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../main.dart';
 
 class MyUserPage extends StatefulWidget {
   const MyUserPage({super.key});
@@ -21,6 +24,7 @@ class _BottomNavigationBarExampleState extends State<MyUserPage> {
   Widget build(BuildContext context) {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
+    final authProvider = Provider.of<AuthProvider>(context);
     return Container(
       child: Column(
         children: [
@@ -96,7 +100,7 @@ class _BottomNavigationBarExampleState extends State<MyUserPage> {
                        width: maxWidth * 0.3,
                        child:  ElevatedButton(
                            onPressed: () =>
-                           {signIn(_phoneNumber, _smsCode, showToken)},
+                           {signIn(_phoneNumber, _smsCode, authProvider)},
                            child: Text('sign')),
                      ),
 
@@ -107,23 +111,18 @@ class _BottomNavigationBarExampleState extends State<MyUserPage> {
             ),
           ),
           ElevatedButton(onPressed: ()async=>{
-            showToken = (await tok(showToken))!
+            tok(authProvider)
 
-          }, child: Text('获取token'),)
+          }, child: Text('模拟登录'),)
         ],
       ),
     );
   }
 }
 
- Future<String?> tok (String showToken) async {
-  var x = await getToken();
-
-  if(x != null){ print('${x},同步获取token'); return x;}
-  else {
-    print('x 不存在,,, ${x}');
-  }
-
+tok (_authProvider)  {
+  _authProvider.login();
+  print('应该刷新了');
 }
 
 
@@ -163,42 +162,50 @@ Future<dynamic> getSMSCode(_phoneNumber) async {
   // print(response.body);
 }
 
-Future<dynamic> signIn(_phoneNumber, _smsCode, showToken) async {
-  GetCode sI = new GetCode(
-      phoneNumber: _phoneNumber.toString(), smsCode: _smsCode.toString());
-  String sIStr = jsonEncode(sI.toJson());
-  print(sIStr);
-  var url = Uri.parse(
-      'http://192.168.0.3:31000/RcApp/V1/Portal/LoginByPhoneNumberWithAuthCode');
-  var headers = {
-    'Content-Type': 'application/json',
-  };
+Future<dynamic> signIn(_phoneNumber, _smsCode, _authProvider) async {
+  //下面是离线状态下的Token------------------------------
+  saveToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJZCI6NywiQ29udGV4dElkIjoiNGEyZTY0ODMtZWE0MC00OTI3LTgyNTYtMTU0Mjk3ODE3NGZlIiwiRGV2aWNlIjoiIiwiT3BlcmF0b3JJZCI6NTB9.GoXGkYrROFE9EKlgfYdF1ooHgtCold5U6s2g3c7hspM");
+  _authProvider.login();
+  //-----------------------------------------------
 
-  // 发送POST请求
-  var response = await http.post(
-    url,
-    headers: headers,
-    body: sIStr,
-  );
+  //创建POST请求的body对象
+  // GetCode sI = new GetCode(
+  //     phoneNumber: _phoneNumber.toString(), smsCode: _smsCode.toString());
+  // //把body对象序列化
+  // String sIStr = jsonEncode(sI.toJson());
+  // print(sIStr);
+  // //定义后端接口
+  // var url = Uri.parse(
+  //     'http://192.168.0.3:31000/RcApp/V1/Portal/LoginByPhoneNumberWithAuthCode');
+  // //按照后端文档设置请求头
+  // var headers = {
+  //   'Content-Type': 'application/json',
+  // };
+  //
+  // // 发送POST请求
+  // var response = await http.post(
+  //   url,
+  //   headers: headers,
+  //   body: sIStr,
+  // );
+  //
+  // if(response.body != null){
+  //   Map<String, dynamic> token = jsonDecode(response.body);
+  //   if(token['Data'] == ''){
+  //     throw Exception('Data为空，请检查请求是否正确');
+  //   }else{
+  //     // print(token['Data']['Token']);
+  //     //保存Token到磁盘
+  //     saveToken(token['Data']['Token']);
+  //     _authProvider.login();
+  //     // String? userToken = await getToken();
+  //     // print(userToken);
+  //   }
+  //
+  // }else{
+  //   throw Exception('Request failed with status: ${response.statusCode}');
+  // }
 
-  // print(response.body);
-
-  Map<String, dynamic> token = jsonDecode(response.body);
-  // print(token['Data']['Token']);
-  saveToken(token['Data']['Token']);
-  String? userToken = await getToken();
-
-  Future.delayed(Duration(milliseconds: 250), () {
-    // 在这里定义需要延迟执行的操作
-    // print('${userToken},方案欸获取token');
-    // showToken = userToken;
-  });
-
-
-
-
-
-  // return userToken;
 }
 
 
@@ -209,7 +216,6 @@ void saveToken(String token) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setString('userToken', token);
   print('${token},保存token');
-  // await storage.write(key: 'userToken', value: token);
 }
 
 // 获取Token
