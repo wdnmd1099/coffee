@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'maskDialog.dart';
 
@@ -80,7 +82,8 @@ class _MenuCardListState extends State<MenuCardList> {
               itemCount: children.length,
               itemBuilder: (BuildContext context, int childrenIndex) {
                 var childrenItem = children[childrenIndex];
-
+                var ImagesPath = jsonDecode(childrenItem['Images']);
+                print(ImagesPath[0] is String);
                 return Container(
                   padding: EdgeInsets.only(left: 8, right: 8, bottom: 8),
                   child: Container(
@@ -90,7 +93,8 @@ class _MenuCardListState extends State<MenuCardList> {
                       color: Color.fromRGBO(255, 242, 204, 1),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Row(
+                    child:
+                    Row(
                       children: [
                         SizedBox(
                           height: maxHeight,
@@ -110,7 +114,9 @@ class _MenuCardListState extends State<MenuCardList> {
                                 bottomLeft: Radius.circular(8.0),
                               ),
                               child: Image.network(
-                                'https://img2.baidu.com/it/u=2396175778,1836017861&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=666',
+                                // 'https://img2.baidu.com/it/u=2396175778,1836017861&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=666',
+                                'http://192.168.0.3:9000/rc-resource/${ImagesPath[0]}',
+
                                 fit: BoxFit.cover,
                               ),
                             ),

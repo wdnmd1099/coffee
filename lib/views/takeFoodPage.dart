@@ -29,7 +29,7 @@ class _TakeFoodState extends State<TakeFood> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 // 请求还在进行中
-                print('进行中');
+                // print('进行中');
                 return CircularProgressIndicator();
               } else if (snapshot.hasError) {
                 // 请求发生错误
@@ -90,7 +90,7 @@ class TakeFoodObj {
 }
 
 Future<List> takeFoodPageToGetData() async {
-  print('这是取餐页的方法被调用了');
+  // print('这是取餐页的方法被调用了');
   TakeFoodObj take = TakeFoodObj(
     ShopCode: 's001',
     Page: 1,

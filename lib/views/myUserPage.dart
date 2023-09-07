@@ -65,8 +65,7 @@ class _BottomNavigationBarExampleState extends State<MyUserPage> {
               ),
               onChanged: (value) {
                 setState(
-                  () {
-                    _smsCode = int.tryParse(value)!;
+                  () {_smsCode = int.tryParse(value)!;
                   },
                 );
               },
@@ -121,7 +120,7 @@ class _BottomNavigationBarExampleState extends State<MyUserPage> {
 
 tok (_authProvider)  {
   _authProvider.login();
-  print('应该刷新了');
+  // print('应该刷新了');
 }
 
 
