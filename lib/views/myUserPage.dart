@@ -18,7 +18,6 @@ class MyUserPage extends StatefulWidget {
 class _BottomNavigationBarExampleState extends State<MyUserPage> {
   int _phoneNumber = 0;
   int _smsCode = 0;
-  String showToken = 'xxx';
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,6 @@ class _BottomNavigationBarExampleState extends State<MyUserPage> {
         children: [
           Text(_phoneNumber.toString()),
           Text(_smsCode.toString()),
-          Text(showToken),
           Container(
             width: maxWidth * 0.9,
             child: TextFormField(

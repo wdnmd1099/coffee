@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class TakeFoodCard extends StatefulWidget {
   TakeFoodCard({super.key, required this.takeFoodData}){
-    print(json.decode(this.takeFoodData[0]['ExtraOfGoods']) is List);
+    // print(json.decode(this.takeFoodData[0]['ExtraOfGoods']) is List);
   }
 
   final List takeFoodData;

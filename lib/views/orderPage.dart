@@ -23,9 +23,7 @@ class _MyHomePageState extends State<OrderPage> {
   Widget build(BuildContext context) {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
-    var c1 = postDataToGetMenu();
-    // print(c1);
-    getImgPath();
+
     return FutureBuilder<List>(
       future: postDataToGetMenu(),
       builder: (context, snapshot) {
@@ -127,14 +125,4 @@ Future<List> postDataToGetMenu() async {
   List menuList = jsonMap['Data'];
 
   return menuList;
-}
-
-
-
-getImgPath ()async{
-  var url = Uri.parse('http://192.168.0.3:31000/RcApp/V1/Portal/Index');
-  var response = await http.get(url);
-
-  print(response.body);
-
 }

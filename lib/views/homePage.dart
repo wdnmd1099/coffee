@@ -14,7 +14,7 @@ class _MyHomePageState extends State<HomePage> {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
 
-    return   Scaffold(
+    return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(maxHeight * 0.05), //Appbar高度
         child: CenterAppbar(titleName: '首页',),

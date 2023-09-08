@@ -22,11 +22,6 @@ class _MenuCardListState extends State<MenuCardList> {
     setState(() {
       _visible = true;
     });
-    // Future.delayed().then((value) {
-    //   setState(() {
-    //     _visible = true;
-    //   });
-    // });
   }
 
   @override
@@ -83,7 +78,7 @@ class _MenuCardListState extends State<MenuCardList> {
               itemBuilder: (BuildContext context, int childrenIndex) {
                 var childrenItem = children[childrenIndex];
                 var ImagesPath = jsonDecode(childrenItem['Images']);
-                print(ImagesPath[0] is String);
+                // print(ImagesPath[0] is String);
                 return Container(
                   padding: EdgeInsets.only(left: 8, right: 8, bottom: 8),
                   child: Container(

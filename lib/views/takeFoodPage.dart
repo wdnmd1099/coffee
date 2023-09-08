@@ -1,6 +1,7 @@
 import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
+// part 'data_qifeimodel.g.dart';
 
-// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:coffee/component/takeFoodCardList.dart';
@@ -8,6 +9,10 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../component/centerAppbar.dart';
 import '../main.dart';
+
+import 'package:json_annotation/json_annotation.dart';
+
+part 'takeFoodPage.g.dart';
 
 class TakeFood extends StatefulWidget {
   const TakeFood({super.key});
@@ -23,6 +28,8 @@ class _TakeFoodState extends State<TakeFood> {
     double maxWidth = MediaQuery.of(context).size.width;
     final authProvider = Provider.of<AuthProvider>(context);
     // print(getToken());
+    takeFoodPageToGetData();
+    // return Text('');
     return authProvider.isLoggedIn
         ? FutureBuilder<List<dynamic>>(
             future: takeFoodPageToGetData(),
@@ -33,8 +40,11 @@ class _TakeFoodState extends State<TakeFood> {
                 return CircularProgressIndicator();
               } else if (snapshot.hasError) {
                 // 请求发生错误
-                return Text('发生错误: ${snapshot.error}');
-              } else {
+                print(snapshot.error);
+                return Center(child:Text('发生错误: ${snapshot.error}'));
+              }
+
+              else {
                 // 请求成功完成
                 List orderData = [];
                 if (snapshot.data!.length > 0) {
@@ -72,10 +82,10 @@ class _TakeFoodState extends State<TakeFood> {
 }
 
 class TakeFoodObj {
-  String? Id;   //订单编号
+  String? Id; //订单编号
   String? ShopCode; //店铺编码
-  double? Page; //分页码
-  double? PageSize; //分页大小
+  int? Page; //分页码
+  int? PageSize; //分页大小
 
   TakeFoodObj({this.Id, this.ShopCode, this.Page, this.PageSize}) {}
 
@@ -88,6 +98,11 @@ class TakeFoodObj {
     };
   }
 }
+
+
+
+
+
 
 Future<List> takeFoodPageToGetData() async {
   // print('这是取餐页的方法被调用了');
@@ -111,15 +126,20 @@ Future<List> takeFoodPageToGetData() async {
       headers: headers,
       body: jsonString1,
     );
-    //序列化获得的订单，有订单数count，但目前测试数量不多，如有多页逻辑再写
-    Map<String, dynamic> jsonMap = json.decode(response.body);
-    //有数量和订单 {数量：XXX，订单：【xxxxxxx】}
-    // Map orderData = jsonMap['Data'];
-    //订单列表
-    List<dynamic> orderData = jsonMap['Data']['Data'];
-    // print(orderData);
 
-    return orderData;
+    String jsonString = response.body;
+    Map<String, dynamic> jsonMap = json.decode(jsonString);
+
+    HaveData haveData = HaveData.fromJson(jsonMap);
+    // print(jsonMap['Data']['Data'] is List);
+    var lll = jsonEncode(haveData.Data);
+
+    IsData isData = IsData.fromJson(json.decode(lll));
+    print(isData.Data);
+
+    // return IsData.Data 或者 jsonMap['Data']['Data'] 都可以，它们是一样的，不同的是前者是通过对象new出来的，后者是直接解析出来的
+    return isData.Data;
+
   } else {
     print('token null 了');
     return [];
@@ -131,4 +151,25 @@ Future<String?> getToken() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final String? userToken = prefs.getString('userToken');
   return userToken;
+}
+
+
+@JsonSerializable()
+class HaveData {
+  double Type;
+  double Code;
+  String Desc;
+  Map<String,dynamic> Data;
+  HaveData({required this.Type, required this.Code, required this.Desc,required this.Data});
+  factory HaveData.fromJson(Map<String, dynamic> json) => _$HaveDataFromJson(json);
+  Map<String, dynamic> toJson() => _$HaveDataToJson(this);
+}
+
+@JsonSerializable()
+class IsData {
+  double Count;
+  List Data;
+  IsData({required this.Count, required this.Data,});
+  factory IsData.fromJson(Map<String, dynamic> json) => _$IsDataFromJson(json);
+  Map<String, dynamic> toJson() => _$IsDataToJson(this);
 }
