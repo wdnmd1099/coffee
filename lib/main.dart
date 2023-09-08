@@ -42,6 +42,7 @@ class AuthProvider with ChangeNotifier {
   void logout() {
     // 登出逻辑
     _isLoggedIn = false;
+    print(_isLoggedIn);
     notifyListeners();
   }
 }

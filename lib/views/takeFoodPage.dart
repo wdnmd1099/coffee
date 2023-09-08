@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
-// part 'data_qifeimodel.g.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -9,8 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../component/centerAppbar.dart';
 import '../main.dart';
-
-import 'package:json_annotation/json_annotation.dart';
 
 part 'takeFoodPage.g.dart';
 
@@ -27,9 +24,7 @@ class _TakeFoodState extends State<TakeFood> {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
     final authProvider = Provider.of<AuthProvider>(context);
-    // print(getToken());
-    takeFoodPageToGetData();
-    // return Text('');
+
     return authProvider.isLoggedIn
         ? FutureBuilder<List<dynamic>>(
             future: takeFoodPageToGetData(),
@@ -41,7 +36,7 @@ class _TakeFoodState extends State<TakeFood> {
               } else if (snapshot.hasError) {
                 // 请求发生错误
                 print(snapshot.error);
-                return Center(child:Text('发生错误: ${snapshot.error}'));
+                return Center(child:Text(' ${snapshot.error}'));
               }
 
               else {
@@ -127,18 +122,22 @@ Future<List> takeFoodPageToGetData() async {
       body: jsonString1,
     );
 
+
     String jsonString = response.body;
     Map<String, dynamic> jsonMap = json.decode(jsonString);
+    if(jsonMap['Data']['Count'] == 0){
+      throw '订单数为零，请检查是否是新用户或发的请求有误';
+    }else{
+      HaveData haveData = HaveData.fromJson(jsonMap);
+      // print(jsonMap['Data']['Data'] is List);
+      var lll = jsonEncode(haveData.Data);
 
-    HaveData haveData = HaveData.fromJson(jsonMap);
-    // print(jsonMap['Data']['Data'] is List);
-    var lll = jsonEncode(haveData.Data);
+      IsData isData = IsData.fromJson(json.decode(lll));
+      // print(isData.Count);
+      // return IsData.Data 或者 jsonMap['Data']['Data'] 都可以，它们是一样的，不同的是前者是通过对象new出来的，后者是直接解析出来的
+      return isData.Data;
+    }
 
-    IsData isData = IsData.fromJson(json.decode(lll));
-    print(isData.Data);
-
-    // return IsData.Data 或者 jsonMap['Data']['Data'] 都可以，它们是一样的，不同的是前者是通过对象new出来的，后者是直接解析出来的
-    return isData.Data;
 
   } else {
     print('token null 了');
@@ -156,8 +155,8 @@ Future<String?> getToken() async {
 
 @JsonSerializable()
 class HaveData {
-  double Type;
-  double Code;
+  int Type;
+  int Code;
   String Desc;
   Map<String,dynamic> Data;
   HaveData({required this.Type, required this.Code, required this.Desc,required this.Data});
@@ -167,7 +166,7 @@ class HaveData {
 
 @JsonSerializable()
 class IsData {
-  double Count;
+  int Count;
   List Data;
   IsData({required this.Count, required this.Data,});
   factory IsData.fromJson(Map<String, dynamic> json) => _$IsDataFromJson(json);

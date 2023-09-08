@@ -7,8 +7,8 @@ part of 'takeFoodPage.dart';
 // **************************************************************************
 
 HaveData _$HaveDataFromJson(Map<String, dynamic> json) => HaveData(
-      Type: (json['Type'] as num).toDouble(),
-      Code: (json['Code'] as num).toDouble(),
+      Type: json['Type'] as int,
+      Code: json['Code'] as int,
       Desc: json['Desc'] as String,
       Data: json['Data'] as Map<String, dynamic>,
     );
@@ -21,7 +21,7 @@ Map<String, dynamic> _$HaveDataToJson(HaveData instance) => <String, dynamic>{
     };
 
 IsData _$IsDataFromJson(Map<String, dynamic> json) => IsData(
-      Count: (json['Count'] as num).toDouble(),
+      Count: json['Count'] as int,
       Data: json['Data'] as List<dynamic>,
     );
 

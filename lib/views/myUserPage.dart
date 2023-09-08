@@ -109,7 +109,7 @@ class _BottomNavigationBarExampleState extends State<MyUserPage> {
           ElevatedButton(onPressed: ()async=>{
             tok(authProvider)
 
-          }, child: Text('模拟登录'),)
+          }, child: Text('登出'),)
         ],
       ),
     );
@@ -117,7 +117,7 @@ class _BottomNavigationBarExampleState extends State<MyUserPage> {
 }
 
 tok (_authProvider)  {
-  _authProvider.login();
+  _authProvider.logout();
   // print('应该刷新了');
 }
 
@@ -160,12 +160,15 @@ Future<dynamic> getSMSCode(_phoneNumber) async {
 
 Future<dynamic> signIn(_phoneNumber, _smsCode, _authProvider) async {
   //下面是离线状态下的Token------------------------------
-  saveToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJZCI6NywiQ29udGV4dElkIjoiNGEyZTY0ODMtZWE0MC00OTI3LTgyNTYtMTU0Mjk3ODE3NGZlIiwiRGV2aWNlIjoiIiwiT3BlcmF0b3JJZCI6NTB9.GoXGkYrROFE9EKlgfYdF1ooHgtCold5U6s2g3c7hspM");
+  //这个是有订单数据的
+  // saveToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJZCI6NywiQ29udGV4dElkIjoiNGEyZTY0ODMtZWE0MC00OTI3LTgyNTYtMTU0Mjk3ODE3NGZlIiwiRGV2aWNlIjoiIiwiT3BlcmF0b3JJZCI6NTB9.GoXGkYrROFE9EKlgfYdF1ooHgtCold5U6s2g3c7hspM");
+  //这给是没有订单数据的
+  saveToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJZCI6NywiQ29udGV4dElkIjoiMzg5NzQ2NjctYjU3OS00YzdiLWE0OGQtNWI3NDNiZjQ1NTUyIiwiRGV2aWNlIjoiIiwiT3BlcmF0b3JJZCI6ODN9.ux_-fOF87O8QeMKyKUCFBvmVdrKxM8g5XBKG31zvbbI');
   _authProvider.login();
   //-----------------------------------------------
 
-  //创建POST请求的body对象
-  // GetCode sI = new GetCode(
+  //// 创建POST请求的body对象
+  // GetCode sI = GetCode(
   //     phoneNumber: _phoneNumber.toString(), smsCode: _smsCode.toString());
   // //把body对象序列化
   // String sIStr = jsonEncode(sI.toJson());
@@ -197,7 +200,7 @@ Future<dynamic> signIn(_phoneNumber, _smsCode, _authProvider) async {
   //     // String? userToken = await getToken();
   //     // print(userToken);
   //   }
-  //
+
   // }else{
   //   throw Exception('Request failed with status: ${response.statusCode}');
   // }
