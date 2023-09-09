@@ -29,7 +29,25 @@ class _MenuCardListState extends State<MenuCardList> {
   Widget build(BuildContext context) {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
-    var x = [{'状态':['冰(推荐)','比较烫','温']},{'冰量':['正常','少冰','少少冰','去冰']},{'糖量':['少糖','少少糖','多糖']}];
+    var x = [
+      {
+        '状态': ['冰(推荐)', '比较烫', '温',]
+      },
+      {
+        '甜度': ['少糖', '少少糖', '多糖',]
+      },
+      {
+        '冰量': ['推荐', '少冰', '少少冰','去冰',]
+      },
+      {
+        '茶底': ['绿妍(推荐)', '百岁山(不推荐)', '去茶底',]
+      },
+      {
+        '糖量': ['正常糖','少糖', '少少糖', '多糖',]
+      },
+
+
+    ];
     return ListView.builder(
       itemCount: widget.meun.length,
       itemBuilder: (BuildContext context, int index) {
@@ -202,12 +220,12 @@ class _MenuCardListState extends State<MenuCardList> {
                                                 ),
                                               ),
                                               dialogWidget:Container(
-                                                height: maxHeight *0.5,
-                                                width: maxWidth * 0.9,
+                                                height: maxHeight * 0.7,
+                                                // width: maxWidth * 0.3,
                                                 // color: Colors.yellow,
                                                 decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(8),
-                                                  color: Colors.green,
+                                                  color: Colors.white,
                                                 ),
                                                 child: OptionCardList(optionList: x,)
 
