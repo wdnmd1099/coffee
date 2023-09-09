@@ -14,7 +14,7 @@ class bottomNavigationBar extends StatefulWidget {
 }
 
 class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
-  int _selectedIndex = 4;
+  int _selectedIndex = 1;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 

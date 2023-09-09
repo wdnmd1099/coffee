@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screen/bottomNavigationBar.dart';
-
+import 'stateManage/stateManage.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider<AuthProvider>(
-      create: (_) => AuthProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
+        ChangeNotifierProvider<ChangeMenuOptions>(create: (_) => ChangeMenuOptions()),
+      ],
       child: MyApp(),
     ),
   );
@@ -28,21 +31,3 @@ class MyApp extends StatelessWidget {
 }
 
 
-class AuthProvider with ChangeNotifier {
-  bool _isLoggedIn = false;
-
-  bool get isLoggedIn => _isLoggedIn;
-
-  void login() {
-    // 登录逻辑
-    _isLoggedIn = true;
-    notifyListeners();
-  }
-
-  void logout() {
-    // 登出逻辑
-    _isLoggedIn = false;
-    print(_isLoggedIn);
-    notifyListeners();
-  }
-}

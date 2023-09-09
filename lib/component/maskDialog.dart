@@ -41,7 +41,7 @@ class _DialogWidgetState extends State<DialogWidget> {
               child: Dialog(
                 child: Container(
                   padding:
-                  const EdgeInsets.all(16.0),
+                  const EdgeInsets.all(0.0),
                   child: widget.dialogWidget,
                 ),
               ),

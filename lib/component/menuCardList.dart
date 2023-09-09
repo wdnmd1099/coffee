@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:coffee/component/optionCardList.dart';
 import 'package:flutter/material.dart';
 import 'maskDialog.dart';
 
@@ -28,6 +29,7 @@ class _MenuCardListState extends State<MenuCardList> {
   Widget build(BuildContext context) {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
+    var x = [{'状态':['冰(推荐)','比较烫','温']},{'冰量':['正常','少冰','少少冰','去冰']},{'糖量':['少糖','少少糖','多糖']}];
     return ListView.builder(
       itemCount: widget.meun.length,
       itemBuilder: (BuildContext context, int index) {
@@ -191,15 +193,25 @@ class _MenuCardListState extends State<MenuCardList> {
                                                   borderRadius:
                                                   BorderRadius.circular(4),
                                                 ),
-                                                child: Center(
-                                                  child: const Text(
+                                                child: const Center(
+                                                  child: Text(
                                                     '选配',
                                                     style: TextStyle(
                                                         fontSize: 8),
                                                   ),
                                                 ),
                                               ),
-                                              dialogWidget:const Text('这是一个对话框'),
+                                              dialogWidget:Container(
+                                                height: maxHeight *0.5,
+                                                width: maxWidth * 0.9,
+                                                // color: Colors.yellow,
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(8),
+                                                  color: Colors.green,
+                                                ),
+                                                child: OptionCardList(optionList: x,)
+
+                                              ),
                                             ),
                                           ),
                                         ),

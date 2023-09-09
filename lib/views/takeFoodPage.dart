@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../component/centerAppbar.dart';
 import '../main.dart';
-
+import 'package:coffee/stateManage/stateManage.dart';
 part 'takeFoodPage.g.dart';
 
 class TakeFood extends StatefulWidget {

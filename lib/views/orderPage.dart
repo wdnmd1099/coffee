@@ -80,13 +80,6 @@ class Shop {
     shopD = this.shopD;
   }
 
-  // factory Shop.fromJson(Map<String, dynamic> json) {
-  //   print('工厂了');
-  //   return Shop(
-  //     shopD: json['shopD'],
-  //   );
-  // }
-
   Map<String, dynamic> toJson() {
     return {
       'ShopCode': shopD,
