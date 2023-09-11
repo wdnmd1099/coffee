@@ -34,9 +34,6 @@ class _MenuCardListState extends State<MenuCardList> {
         '状态': ['冰(推荐)', '比较烫', '温',]
       },
       {
-        '甜度': ['少糖', '少少糖', '多糖',]
-      },
-      {
         '冰量': ['推荐', '少冰', '少少冰','去冰',]
       },
       {

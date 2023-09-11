@@ -40,13 +40,13 @@ class OptionCardList extends StatefulWidget {
 }
 
 class _OptionCardListState extends State<OptionCardList> {
-  Map showValues = {};
-  Map selectedValues = {};
-  Map changedSelectedValues = {};
+  Map showValues = {};  //当前选择的设置，最终返回这个设置
+  Map selectedValues = {}; //在冰页面选择的设置
+  Map changedSelectedValues = {};  // 在烫或温选择的设置
 
-  List showList = [];
-  List testList = [];
-  List changedList = [];
+  List showList = []; //用来显示的数组，用于切换状态时更新页面
+  List testList = []; //冰页面数组
+  List changedList = []; //烫温页面的数组
   @override
   void initState() {
     super.initState();
@@ -54,14 +54,16 @@ class _OptionCardListState extends State<OptionCardList> {
     changedList = widget.eee;
     showList = testList;
 
+
+    //初始化设置列表，把每个选项的首个选项设置为默认选项
     for (int i = 0; i < widget.optionList.length; i++) {
       selectedValues[widget.optionList[i].keys.first] = widget.optionList[i][widget.optionList[i].keys.first][0];
-      // print(widget.optionList[i].keys.first);
-      // print(widget.optionList[i][widget.optionList[i].keys.first][0]);
     }
+    //初始化设置列表，把每个选项的首个选项设置为默认选项
     for (int i = 0; i < widget.eee.length; i++) {
       changedSelectedValues[widget.eee[i].keys.first] = widget.eee[i][widget.eee[i].keys.first][0];
     }
+    //因为首页是冰页面。把显示设置为冰页面的设置
     showValues = selectedValues;
 
   }
@@ -148,8 +150,8 @@ class _OptionCardListState extends State<OptionCardList> {
                                   }else{
                                     changedSelectedValues[item.keys.first] = item[item.keys.first][i];
                                   }
-                                  // print(selectedValues);
-                                  // print(changedSelectedValues);
+                                  print(selectedValues);
+                                  print(changedSelectedValues);
                                 }
 
                               })
@@ -167,7 +169,7 @@ class _OptionCardListState extends State<OptionCardList> {
                               // color: Colors.black,
                               child: Text('${item[item.keys.first][i]}'),
                             ),
-                          )
+                          ),
                       ],
                     ),
                   ),

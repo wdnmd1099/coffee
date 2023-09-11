@@ -4,15 +4,7 @@ import 'Test.dart';
 
 import '../stateManage/stateManage.dart';
 
-void main() => runApp(
-  MultiProvider(
-    providers: [
-      ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
-      ChangeNotifierProvider<ChangeMenuOptions>(create: (_) => ChangeMenuOptions()),
-    ],
-    child: XXX(),
-  ),
-);
+void main() => runApp(XXX());
 
 class XXX extends StatelessWidget {
   const XXX({super.key});
@@ -39,9 +31,6 @@ class _BottomNavigationBarExampleState extends State<WWW> {
         '状态': ['冰(推荐)', '比较烫', '温',]
       },
       {
-        '甜度': ['少糖', '少少糖', '多糖',]
-      },
-      {
         '冰量': ['推荐', '少冰', '少少冰','去冰',]
       },
       {
@@ -49,6 +38,9 @@ class _BottomNavigationBarExampleState extends State<WWW> {
       },
       {
         '糖量': ['正常糖','少糖', '少少糖', '多糖',]
+      },
+      {
+        '加大料': ['八角','话梅', '陈皮', '桂皮',]
       },
 
 
