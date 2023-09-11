@@ -28,18 +28,21 @@ class OptionCardList extends StatefulWidget {
   OptionCardList({super.key, required this.optionList});
 
   @override
-  State<OptionCardList> createState() => _OptionCardListState(eee,optionList);
+  State<OptionCardList> createState() => _OptionCardListState();
 }
 
 class _OptionCardListState extends State<OptionCardList> {
   Map selectedValues = {};
   Map changedSelectedValues = {};
-  _OptionCardListState(List<Map<String, dynamic>> eee, List optionList) {
-    for(int i=0;i<optionList.length;i++){
-      selectedValues[optionList[i].keys.first] = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    for(int i=0;i<widget.optionList.length;i++){
+      selectedValues[widget.optionList[i].keys.first] = 0;
     }
-    for(int i=0;i<eee.length;i++){
-      changedSelectedValues[eee[i].keys.first] = 0;
+    for(int i=0;i<widget.eee.length;i++){
+      changedSelectedValues[widget.eee[i].keys.first] = 0;
     }
   }
 
