@@ -34,7 +34,6 @@ class OptionCardList extends StatefulWidget {
 class _OptionCardListState extends State<OptionCardList> {
   Map selectedValues = {};
   Map changedSelectedValues = {};
-  int drinkState = 0;
   _OptionCardListState(List<Map<String, dynamic>> eee, List optionList) {
     for(int i=0;i<optionList.length;i++){
       selectedValues[optionList[i].keys.first] = 0;
@@ -68,13 +67,9 @@ class _OptionCardListState extends State<OptionCardList> {
                   ),
                   Container(
                     color: Colors.white,
-                    // height: maxHeight * 0.2,
-                    // width: maxWidth * 0.8,
                     child: ListView(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      // scrollDirection: Axis.horizontal,
-                      // itemCount: item[item.keys.first].length, //数组长度
                       children: [
                         Container(
                           padding: EdgeInsets.all(8),
@@ -98,8 +93,8 @@ class _OptionCardListState extends State<OptionCardList> {
                                         selectedValues[item.keys.first] = i;
                                         changedSelectedValues[item.keys.first] = i;
                                       }
-                                      print(selectedValues);
-                                      print(changedSelectedValues);
+                                      // print(selectedValues);
+                                      // print(changedSelectedValues);
                                     })
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -129,9 +124,6 @@ class _OptionCardListState extends State<OptionCardList> {
             itemCount: widget.eee.length, //数组长度
             itemBuilder: (BuildContext context, int index1) {
               var item1 = widget.eee[index1]; //index是当前元素的下标，这样就指当前元素
-              // changedSelectedValues[item1.keys.first] = 0;
-              // print(changedSelectedValues);
-              // print(changedSelectedValues);
               if (item1[item1.keys.first] == null ||
                   item1[item1.keys.first]?.length == 0) {
                 print('更新的数组内容为空');
@@ -178,8 +170,8 @@ class _OptionCardListState extends State<OptionCardList> {
                                         selectedValues[item1.keys.first] = i;
                                         changedSelectedValues[item1.keys.first] = i;
                                       }
-                                      print(selectedValues);
-                                      print(changedSelectedValues);
+                                      // print(selectedValues);
+                                      // print(changedSelectedValues);
                                     })
                                   },
                                   style: ElevatedButton.styleFrom(
