@@ -21,3 +21,21 @@ class AuthProvider with ChangeNotifier {
   }
 }
 
+//遮罩对话框状态管理
+class MaskDiaLog with ChangeNotifier {
+  bool _isOpen = false;
+
+  bool get isOpen => _isOpen;
+
+  void open() {
+    // 登录逻辑
+    _isOpen = true;
+    notifyListeners();
+  }
+
+  void off() {
+    // 登出逻辑
+    _isOpen = false;
+    notifyListeners();
+  }
+}

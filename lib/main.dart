@@ -8,6 +8,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
+        ChangeNotifierProvider<MaskDiaLog>(create: (_) => MaskDiaLog()),
       ],
       child: MyApp(),
     ),

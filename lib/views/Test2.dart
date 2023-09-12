@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'Test.dart';
-
-import '../stateManage/stateManage.dart';
 
 void main() => runApp(XXX());
 
@@ -125,6 +122,7 @@ class _BottomNavigationBarExampleState extends State<WWW> {
       optionList: x,
       sameMode: true,
       changeOption: '状态',
+      btnTitle: '加入购物车',
     );
   }
 }

@@ -15,15 +15,6 @@ class MenuCardList extends StatefulWidget {
 }
 
 class _MenuCardListState extends State<MenuCardList> {
-  bool _visible = false;
-
-  void initState() {
-    super.initState();
-    // 延迟一段时间后显示对话框的淡入效果
-    setState(() {
-      _visible = true;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

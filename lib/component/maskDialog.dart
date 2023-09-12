@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../stateManage/stateManage.dart';
 
 
 //此组件是一个遮罩层对话框组件，需要传入点击后触发显示对话框的按钮样式，和显示的对话框样式
@@ -12,30 +15,33 @@ class DialogWidget extends StatefulWidget {
 }
 
 class _DialogWidgetState extends State<DialogWidget> {
-  bool _visible = false;
-
-
-  @override
-  void initState() {
-    super.initState();
-    // 延迟一段时间后显示对话框的淡入效果
-    setState(() {
-      _visible = true;
-    });
-  }
+  // bool _visible = false;
+  //
+  //
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // 延迟一段时间后显示对话框的淡入效果
+  //   setState(() {
+  //     _visible = true;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final maskDiaLog = Provider.of<MaskDiaLog>(context);
     return GestureDetector(
       child: widget.wrapper,
       onTap: () {
+        maskDiaLog.open();
         showDialog(
+          // barrierDismissible:false,
           context: context,
           builder:
               (BuildContext context) {
             return AnimatedOpacity(
               opacity:
-              _visible ? 1.0 : 0.0,
+              maskDiaLog.isOpen ? 1.0 : 0.0,
               duration:
               const Duration(),
               child: Dialog(
