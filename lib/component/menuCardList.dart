@@ -30,20 +30,98 @@ class _MenuCardListState extends State<MenuCardList> {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
     var x = [
-      {
-        '状态': ['冰(推荐)', '比较烫', '温',]
+      [
+        {
+          '状态': [
+            '冰(推荐)',
+            '比较烫',
+            '温',
+          ]
+        },
+        {
+          '冰量': [
+            '推荐',
+            '少冰',
+            '少少冰',
+            '去冰',
+          ]
+        },
+        {
+          '茶底': [
+            '绿妍(推荐)',
+            '百岁山(不推荐)',
+            '去茶底',
+          ]
+        },
+        {
+          '糖量': [
+            '正常糖',
+            '少糖',
+            '少少糖',
+            '多糖',
+          ]
+        },
+        {
+          '加大料': [
+            '八角',
+            '话梅',
+            '陈皮',
+            '桂皮',
+          ]
+        },
+      ],
+      [ {
+        '状态': ['冰(推荐)', '比较烫', '温'],
       },
-      {
-        '冰量': ['推荐', '少冰', '少少冰','去冰',]
+        {
+          '茶底': [
+            '绿妍(推荐)',
+            '百岁山(不推荐)',
+            '去茶底',
+          ],
+        },
+        {
+          '糖量': [
+            '正常糖',
+            '少糖',
+            '少少糖',
+            '多糖',
+          ],
+        },
+        {
+          "加小料": [
+            '红豆',
+            '珍珠',
+            '青稞',
+            '什么冻',
+          ],
+        },],
+      [ {
+        '状态': ['冰(推荐)', '比较烫', '温'],
       },
-      {
-        '茶底': ['绿妍(推荐)', '百岁山(不推荐)', '去茶底',]
-      },
-      {
-        '糖量': ['正常糖','少糖', '少少糖', '多糖',]
-      },
-
-
+        {
+          '茶底': [
+            '绿妍(推荐)',
+            '百岁山(不推荐)',
+            '去茶底',
+          ],
+        },
+        {
+          '糖量': [
+            '正常糖',
+            '少糖',
+            '少少糖',
+            '多糖',
+          ],
+        },
+        {
+          "加小料": [
+            '红豆',
+            '珍珠',
+            '青稞',
+            '什么冻',
+          ],
+        },],
     ];
     return ListView.builder(
       itemCount: widget.meun.length,
@@ -218,14 +296,19 @@ class _MenuCardListState extends State<MenuCardList> {
                                               ),
                                               dialogWidget:Container(
                                                 height: maxHeight * 0.7,
-                                                // width: maxWidth * 0.3,
+                                                width: maxWidth,
                                                 // color: Colors.yellow,
                                                 decoration: BoxDecoration(
                                                   borderRadius: BorderRadius.circular(8),
                                                   color: Colors.white,
                                                 ),
-                                                child: OptionCardList(optionList: x,)
 
+                                                child: OptionCardList(
+                                                  optionList: x,
+                                                  sameMode: true,
+                                                  changeOption: '状态',
+                                                  btnTitle: '加入购物车',
+                                                ),
                                               ),
                                             ),
                                           ),

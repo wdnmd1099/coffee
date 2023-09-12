@@ -8,7 +8,6 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
-        ChangeNotifierProvider<ChangeMenuOptions>(create: (_) => ChangeMenuOptions()),
       ],
       child: MyApp(),
     ),
