@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:coffee/views/homePage.dart';
 import 'package:coffee/views/orderPage.dart';
 import 'package:coffee/views/myUserPage.dart';
+import 'package:coffee/views/userPage.dart';
 import 'package:coffee/views/takeFoodPage.dart';
 
 class bottomNavigationBar extends StatefulWidget {
@@ -14,7 +15,7 @@ class bottomNavigationBar extends StatefulWidget {
 }
 
 class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 4;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
@@ -29,11 +30,9 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
 
       TakeFood(),
 
-      Text(
-        'Index 2: School',
-        style: optionStyle,
-      ),
-      MyUserPage(),
+      Center(child: Text('未开发此页面'),),
+
+      UserPage(),
     ];
     return widgetOptions;
   }
@@ -45,11 +44,9 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
 
     TakeFood(),
 
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-    MyUserPage(),
+    Center(child: Text('未开发此页面'),),
+
+    UserPage(),
   ];
 
   void _onItemTapped(int index) {

@@ -198,7 +198,7 @@ class _MenuCardListState extends State<MenuCardList> {
                                 // 'https://img2.baidu.com/it/u=2396175778,1836017861&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=666',
                                 'http://192.168.0.3:9000/rc-resource/${ImagesPath[0]}',
 
-                                fit: BoxFit.cover,
+                                fit: BoxFit.cover, //fill就可以看到全图，但是会变形，cover不会变形但会看不到全图
                               ),
                             ),
                           ), //产品图

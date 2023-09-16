@@ -26,61 +26,62 @@ class _BottomNavigationBarExampleState extends State<MyUserPage> {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
     final authProvider = Provider.of<AuthProvider>(context);
-    return Container(
-      child: Column(
-        children: [
-          Text(_phoneNumber.toString()),
-          Text(_smsCode.toString()),
-          Container(
-            width: maxWidth * 0.9,
-            child: TextFormField(
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly, //限制只能输入数字
-                LengthLimitingTextInputFormatter(11), //限制只能输入11位数，以匹配手机号码
-              ],
-              keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                labelText: 'Phone Number',
+    return Material(
+      child:  Container(
+        child: Column(
+          children: [
+            Text(_phoneNumber.toString()),
+            Text(_smsCode.toString()),
+            Container(
+              width: maxWidth * 0.9,
+              child: TextFormField(
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly, //限制只能输入数字
+                  LengthLimitingTextInputFormatter(11), //限制只能输入11位数，以匹配手机号码
+                ],
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  labelText: 'Phone Number',
+                ),
+                onChanged: (value) {
+                  // print(value.length);
+                  setState(
+                        () {
+                      _phoneNumber = int.tryParse(value)!;
+                    },
+                  );
+                },
               ),
-              onChanged: (value) {
-                // print(value.length);
-                setState(
-                  () {
-                    _phoneNumber = int.tryParse(value)!;
-                  },
-                );
-              },
             ),
-          ),
-          Container(
-            width: maxWidth * 0.9,
-            child: TextFormField(
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly, //限制只能输入数字
-                LengthLimitingTextInputFormatter(6), //限制只能输入11位数，以匹配手机号码
-              ],
-              keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                labelText: 'SMS verification code',
+            Container(
+              width: maxWidth * 0.9,
+              child: TextFormField(
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly, //限制只能输入数字
+                  LengthLimitingTextInputFormatter(6), //限制只能输入11位数，以匹配手机号码
+                ],
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  labelText: 'SMS verification code',
+                ),
+                onChanged: (value) {
+                  setState(
+                        () {_smsCode = int.tryParse(value)!;
+                    },
+                  );
+                },
               ),
-              onChanged: (value) {
-                setState(
-                  () {_smsCode = int.tryParse(value)!;
-                  },
-                );
-              },
             ),
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 20),
-            // color: Colors.red,
-            child: Row(
-              children: [
-                Container(
-                  width: maxWidth * 0.5,
-                  child:
-                  Center(
+            Container(
+              padding: EdgeInsets.only(top: 20),
+              // color: Colors.red,
+              child: Row(
+                children: [
+                  Container(
+                    width: maxWidth * 0.5,
                     child:
+                    Center(
+                      child:
                       Container(
                         width: maxWidth * 0.3,
                         child:  ElevatedButton(
@@ -88,33 +89,36 @@ class _BottomNavigationBarExampleState extends State<MyUserPage> {
                             child: Text('get code')),
                       ),
 
+                    ),
                   ),
-                ),
-               Container(
-                 width: maxWidth * 0.5,
-                 child:
-                 Center(
-                   child:
-                     Container(
-                       width: maxWidth * 0.3,
-                       child:  ElevatedButton(
-                           onPressed: () => {signIn(_phoneNumber, _smsCode, authProvider)},
-                           child: Text('sign')),
-                     ),
+                  Container(
+                    width: maxWidth * 0.5,
+                    child:
+                    Center(
+                      child:
+                      Container(
+                        width: maxWidth * 0.3,
+                        child:  ElevatedButton(
+                            onPressed: () => {signIn(_phoneNumber, _smsCode, authProvider)},
+                            child: Text('sign')),
+                      ),
 
-                 ),
-               ),
+                    ),
+                  ),
 
-              ],
+                ],
+              ),
             ),
-          ),
-          ElevatedButton(onPressed: ()async=>{
-            tok(authProvider)
+            ElevatedButton(onPressed: ()async=>{
+              tok(authProvider)
 
-          }, child: Text('登出'),)
-        ],
+            }, child: Text('登出'),)
+          ],
+        ),
       ),
     );
+
+
   }
 }
 
