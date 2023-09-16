@@ -20,110 +20,185 @@ class _BottomNavigationBarExampleState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    //原版登录界面样式在临时文件
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
-    String awaitYesIcon = '<svg t="1694830795237" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10258" width="32" height="32"><path d="M196.923077 78.769231a118.153846 118.153846 0 0 0-118.153846 118.153846v630.153846a118.153846 118.153846 0 0 0 118.153846 118.153846h630.153846a118.153846 118.153846 0 0 0 118.153846-118.153846V196.923077a118.153846 118.153846 0 0 0-118.153846-118.153846H196.923077z m0-78.769231h630.153846a196.923077 196.923077 0 0 1 196.923077 196.923077v630.153846a196.923077 196.923077 0 0 1-196.923077 196.923077H196.923077a196.923077 196.923077 0 0 1-196.923077-196.923077V196.923077a196.923077 196.923077 0 0 1 196.923077-196.923077z" p-id="10259" fill="#cdcdcd"></path></svg>';
-    String yesIcon = '<svg t="1694830760846" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10025" width="32" height="32"><path d="M196.923077 0h630.153846a196.923077 196.923077 0 0 1 196.923077 196.923077v630.153846a196.923077 196.923077 0 0 1-196.923077 196.923077H196.923077a196.923077 196.923077 0 0 1-196.923077-196.923077V196.923077a196.923077 196.923077 0 0 1 196.923077-196.923077z m0 78.769231a118.153846 118.153846 0 0 0-118.153846 118.153846v630.153846a118.153846 118.153846 0 0 0 118.153846 118.153846h630.153846a118.153846 118.153846 0 0 0 118.153846-118.153846V196.923077a118.153846 118.153846 0 0 0-118.153846-118.153846H196.923077z m584.900923 258.205538a36.509538 36.509538 0 0 1 1.260308 51.633231l-299.480616 313.107692c-0.118154 0.157538-0.393846 0.236308-0.630154 0.472616l-0.393846 0.551384c-2.166154 2.126769-4.726154 3.229538-7.207384 4.726154-1.575385 0.866462-2.796308 2.166154-4.411077 2.835692a35.800615 35.800615 0 0 1-27.490462 0.07877c-1.260308-0.512-2.284308-1.614769-3.544615-2.284308-2.756923-1.457231-5.592615-2.835692-8.034462-5.12-0.196923-0.157538-0.275692-0.433231-0.512-0.669538-0.196923-0.118154-0.393846-0.196923-0.551384-0.354462l-150.843077-156.593231a36.430769 36.430769 0 0 1 0.945231-51.633231 36.391385 36.391385 0 0 1 51.63323 0.945231l124.455385 129.102769 273.092923-285.61723a36.548923 36.548923 0 0 1 51.712-1.181539z" p-id="10026" fill="#cdcdcd"></path></svg>';
-
+    String awaitYesIcon =
+       '<svg t="1694852345246" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="27860" width="32" height="32"><path d="M511.7952 256c141.2096 0 256 114.7904 256 256s-114.7904 256-256 256-256-114.7904-256-256S370.688 256 511.7952 256M511.7952 204.8c-169.6768 0-307.2 137.5232-307.2 307.2 0 169.6768 137.5232 307.2 307.2 307.2s307.2-137.5232 307.2-307.2C818.9952 342.3232 681.472 204.8 511.7952 204.8L511.7952 204.8z" fill="#bfbfbf" p-id="27861"></path></svg>';
+    String yesIcon =
+       '<svg t="1694852431290" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="32252" width="32" height="32"><path d="M514.56 256c141.2096 0 256 114.7904 256 256s-114.7904 256-256 256-256-114.7904-256-256S373.3504 256 514.56 256M514.56 204.8c-169.6768 0-307.2 137.5232-307.2 307.2 0 169.6768 137.5232 307.2 307.2 307.2s307.2-137.5232 307.2-307.2C821.76 342.3232 684.2368 204.8 514.56 204.8L514.56 204.8z" fill="#2c2c2c" p-id="32253"></path><path d="M707.1744 384c-8.8064-7.9872-22.4256-7.3728-30.4128 1.4336L486.912 594.1248l-136.3968-117.76c-9.0112-7.7824-22.6304-6.7584-30.4128 2.2528-7.7824 9.0112-6.7584 22.6304 2.2528 30.4128l152.3712 131.4816c1.2288 1.1264 2.7648 1.7408 4.1984 2.4576 0.8192 0.4096 1.536 1.024 2.3552 1.3312 2.4576 0.9216 5.0176 1.3312 7.4752 1.3312 2.9696 0 5.9392-0.6144 8.704-1.8432 0.9216-0.4096 1.6384-1.2288 2.4576-1.8432 1.6384-1.024 3.3792-1.9456 4.7104-3.3792L708.608 414.5152C716.5952 405.7088 715.9808 392.0896 707.1744 384" fill="#2c2c2c" p-id="32254"></path></svg>';
     return Material(
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(maxHeight * 0.05), //Appbar高度
           child: CenterAppbar(
             titleName: '账户登录',
+            back: true,
           ),
-        ),
+        ), //头部
         body: Container(
-          color: Colors.white,
+          color: Colors.grey[100],
           height: maxHeight,
           width: maxWidth,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
-             GestureDetector(
-               onTap: ()=>{
-                 checkAgree(agree)
-               },
-               child:  Container(
-                 alignment: Alignment.center,
-                 width: maxWidth * 0.8,
-                 height: 30,
-                 decoration: BoxDecoration(
-                   color: Color.fromRGBO(0, 51, 102, 1),
-                   borderRadius: BorderRadius.circular(14),
-                 ),
-                 child: const Text('手机号安全登录',style: TextStyle(fontSize: 12,color: Colors.white),),
-               ),  //手机号安全登录,
-             ),
-              const Padding(padding: EdgeInsets.only(top: 20),),
-              GestureDetector(
-                onTap: ()=>{
-                  checkAgree(agree)
-                },
-                child:  Container(
-                  alignment: Alignment.center,
-                  width: maxWidth * 0.8,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: const Text('一键登录',style: TextStyle(fontSize: 12,color: Colors.white),),
-                ),  //一键登录,
-              ),
-              const Padding(padding: EdgeInsets.only(top: 20),),
               Container(
-                width: maxWidth * 0.9,
-                height: 30,
-                child: Row(
-                  children: [
-                    GestureDetector(
-                      onTap: ()=>{
-                        setState((){
-                          agree = !agree;
-                        })
-                      },
-                      child: agree?SvgPicture.string(
-                        yesIcon, // 替换为您自己的 SVG 图像路径
-                        width: 24.0, // 设置 SVG 图像的宽度
-                        height: 24.0, // 设置 SVG 图像的高度
-                      ):SvgPicture.string(
-                        awaitYesIcon, // 替换为您自己的 SVG 图像路径
-                        width: 24.0, // 设置 SVG 图像的宽度
-                        height: 24.0, // 设置 SVG 图像的高度
-                      ),
-                    ),
-                    const Text(' 已阅读并同意 ',style: TextStyle(fontSize: 12),),
-                    GestureDetector(
-                      onTap: ()=>{
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => UserAgreement()),
+                padding: EdgeInsets.all(8),
+                child: Container(
+                  // padding: EdgeInsets.all(8),
+                  // alignment: Alignment.topCenter,
+                  height: maxHeight * 0.65,
+                  width: maxWidth,
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: maxHeight * 0.4,
+                        color: Colors.transparent,
+                        child: Image.network(
+                          'https://img1.baidu.com/it/u=1353334090,2475923328&fm=253&fmt=auto?w=640&h=359',
+                          fit: BoxFit.cover,
                         ),
-                      },
-                      child: const Text('《用户协议》',style: TextStyle(fontSize: 12,color: Colors.blue),),
-                    ),//用户协议
-                    GestureDetector(
-                      onTap: ()=>{
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => PrivacyAgreement()),
+                      ), //首次登录广告图片
+
+                      Container(
+                        height: maxHeight * 0.25,
+                        width: maxWidth,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () => {checkAgree(agree)},
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: maxWidth * 0.8,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  color: const Color.fromRGBO(0, 51, 102, 1),
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
+                                child: const Text(
+                                  '手机号安全登录',
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.white),
+                                ),
+                              ), //手机号安全登录,
+                            ), //手机安全登录
+                            Padding(
+                              padding: EdgeInsets.only(
+                                top: ((maxHeight * 0.25 - 90) / 3),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => {checkAgree(agree)},
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: maxWidth * 0.8,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
+                                child: const Text(
+                                  '一键登录',
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.white),
+                                ),
+                              ), //一键登录,
+                            ), //一键登录
+                          ],
                         ),
-                      },
-                      child: const Text('《隐私协议》',style: TextStyle(fontSize: 12,color: Colors.blue),),
-                    ),//用户协议
-                    GestureDetector(
-                      onTap: ()=>{
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => PayAgreement()),
-                        ),
-                      },
-                      child: const Text('《支付协议》',style: TextStyle(fontSize: 12,color: Colors.blue),),
-                    ),//用户协议
-                  ],
+                      ), //两个登录选择按钮
+                    ],
+                  ),
                 ),
-              ),//阅读同意
+              ),
+
+              Expanded(
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  padding: EdgeInsets.only(
+                      left: 8, right: 8, bottom: maxHeight * 0.06),
+                  child: Container(
+                    // color: Colors.red,
+                    height: 30,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                            onTap: () => {
+                              setState(() {
+                                agree = !agree;
+                              })
+                            },
+                            child: agree
+                                ? Container(
+                              // color: Colors.red,
+                              padding: EdgeInsets.only(top: 3),
+                              child: SvgPicture.string(
+                                yesIcon, // 替换为您自己的 SVG 图像路径
+                                width: 18.0, // 设置 SVG 图像的宽度
+                                height: 18.0, // 设置 SVG 图像的高度
+                              ),
+                            )
+                                : Container(
+                              padding: EdgeInsets.only(top: 3),
+                              // color: Colors.red,
+                              child: SvgPicture.string(
+                                awaitYesIcon, // 替换为您自己的 SVG 图像路径
+                                width: 18.0, // 设置 SVG 图像的宽度
+                                height: 18.0, // 设置 SVG 图像的高度
+                              ),
+                            )),
+                        const Text(
+                          ' 已阅读并同意 ',
+                          style: TextStyle(fontSize: 10),
+                        ),
+                        GestureDetector(
+                          onTap: () => {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => UserAgreement()),
+                            ),
+                          },
+                          child: const Text(
+                            '《瑞幸咖啡用户协议》',
+                            style: TextStyle(fontSize: 10, color: Colors.blue),
+                          ),
+                        ), //用户协议
+                        GestureDetector(
+                          onTap: () => {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PrivacyAgreement()),
+                            ),
+                          },
+                          child: const Text(
+                            '《隐私协议》',
+                            style: TextStyle(fontSize: 10, color: Colors.blue),
+                          ),
+                        ), //隐私协议
+                        GestureDetector(
+                          onTap: () => {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PayAgreement()),
+                            ),
+                          },
+                          child: const Text(
+                            '《支付协议》',
+                            style: TextStyle(fontSize: 10, color: Colors.blue),
+                          ),
+                        ), //支付协议
+                      ],
+                    ),
+                  ),
+                ),
+              ), //阅读同意
             ],
           ),
         ),
@@ -132,27 +207,10 @@ class _BottomNavigationBarExampleState extends State<LoginPage> {
   }
 }
 
-
-
-checkAgree(bool agree_){
-  if(agree_ == false){
+checkAgree(bool agree_) {
+  if (agree_ == false) {
     print('请先勾选同意框');
-  }else if(agree_ == true){
+  } else if (agree_ == true) {
     print('已同意');
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

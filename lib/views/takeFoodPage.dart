@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../component/centerAppbar.dart';
 import '../main.dart';
 import 'package:coffee/stateManage/stateManage.dart';
+
 part 'takeFoodPage.g.dart';
 
 class TakeFood extends StatefulWidget {
@@ -36,10 +37,8 @@ class _TakeFoodState extends State<TakeFood> {
               } else if (snapshot.hasError) {
                 // 请求发生错误
                 print(snapshot.error);
-                return Center(child:Text(' ${snapshot.error}'));
-              }
-
-              else {
+                return Center(child: Text(' ${snapshot.error}'));
+              } else {
                 // 请求成功完成
                 List orderData = [];
                 if (snapshot.data!.length > 0) {
@@ -70,8 +69,13 @@ class _TakeFoodState extends State<TakeFood> {
               }
             },
           )
-        : Center(
-            child: Text('请先登录'),
+        : Scaffold(
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(maxHeight * 0.05), //Appbar高度
+              child: CenterAppbar(
+                titleName: '取餐',
+              ),
+            ),
           );
   }
 }
@@ -93,11 +97,6 @@ class TakeFoodObj {
     };
   }
 }
-
-
-
-
-
 
 Future<List> takeFoodPageToGetData() async {
   // print('这是取餐页的方法被调用了');
@@ -122,12 +121,11 @@ Future<List> takeFoodPageToGetData() async {
       body: jsonString1,
     );
 
-
     String jsonString = response.body;
     Map<String, dynamic> jsonMap = json.decode(jsonString);
-    if(jsonMap['Data']['Count'] == 0){
+    if (jsonMap['Data']['Count'] == 0) {
       throw '订单数为零，请检查是否是新用户或发的请求有误';
-    }else{
+    } else {
       HaveData haveData = HaveData.fromJson(jsonMap);
       // print(jsonMap['Data']['Data'] is List);
       var lll = jsonEncode(haveData.Data);
@@ -137,8 +135,6 @@ Future<List> takeFoodPageToGetData() async {
       // return IsData.Data 或者 jsonMap['Data']['Data'] 都可以，它们是一样的，不同的是前者是通过对象new出来的，后者是直接解析出来的
       return isData.Data;
     }
-
-
   } else {
     print('token null 了');
     return [];
@@ -152,15 +148,22 @@ Future<String?> getToken() async {
   return userToken;
 }
 
-
 @JsonSerializable()
 class HaveData {
   int Type;
   int Code;
   String Desc;
-  Map<String,dynamic> Data;
-  HaveData({required this.Type, required this.Code, required this.Desc,required this.Data});
-  factory HaveData.fromJson(Map<String, dynamic> json) => _$HaveDataFromJson(json);
+  Map<String, dynamic> Data;
+
+  HaveData(
+      {required this.Type,
+      required this.Code,
+      required this.Desc,
+      required this.Data});
+
+  factory HaveData.fromJson(Map<String, dynamic> json) =>
+      _$HaveDataFromJson(json);
+
   Map<String, dynamic> toJson() => _$HaveDataToJson(this);
 }
 
@@ -168,7 +171,13 @@ class HaveData {
 class IsData {
   int Count;
   List Data;
-  IsData({required this.Count, required this.Data,});
+
+  IsData({
+    required this.Count,
+    required this.Data,
+  });
+
   factory IsData.fromJson(Map<String, dynamic> json) => _$IsDataFromJson(json);
+
   Map<String, dynamic> toJson() => _$IsDataToJson(this);
 }
