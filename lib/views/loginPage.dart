@@ -122,8 +122,89 @@ class _BottomNavigationBarExampleState extends State<LoginPage> {
                       left: 8, right: 8, bottom: maxHeight * 0.06),
                   child: Container(
                     // color: Colors.red,
-                    height: 30,
-                    child: Row(
+                    height: maxWidth < 330? 70 :30,
+                    child: maxWidth < 330?
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                  onTap: () => {
+                                    setState(() {
+                                      agree = !agree;
+                                    })
+                                  },
+                                  child: agree
+                                      ? Container(
+                                    // color: Colors.red,
+                                    padding: EdgeInsets.only(top: 3),
+                                    child: SvgPicture.string(
+                                      yesIcon, // 替换为您自己的 SVG 图像路径
+                                      width: 18.0, // 设置 SVG 图像的宽度
+                                      height: 18.0, // 设置 SVG 图像的高度
+                                    ),
+                                  )
+                                      : Container(
+                                    padding: EdgeInsets.only(top: 3),
+                                    // color: Colors.red,
+                                    child: SvgPicture.string(
+                                      awaitYesIcon, // 替换为您自己的 SVG 图像路径
+                                      width: 18.0, // 设置 SVG 图像的宽度
+                                      height: 18.0, // 设置 SVG 图像的高度
+                                    ),
+                                  )),
+                              const Text(
+                                ' 已阅读并同意 ',
+                                style: TextStyle(fontSize: 10),
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () => {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => UserAgreement()),
+                                      ),
+                                    },
+                                    child: const Text(
+                                      '《瑞幸咖啡用户协议》',
+                                      style: TextStyle(fontSize: 10, color: Colors.blue),
+                                    ),
+                                  ), //用户协议
+                                  GestureDetector(
+                                    onTap: () => {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => PrivacyAgreement()),
+                                      ),
+                                    },
+                                    child: const Text(
+                                      '《隐私协议》',
+                                      style: TextStyle(fontSize: 10, color: Colors.blue),
+                                    ),
+                                  ), //隐私协议
+                                  GestureDetector(
+                                    onTap: () => {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => PayAgreement()),
+                                      ),
+                                    },
+                                    child: const Text(
+                                      '《支付协议》',
+                                      style: TextStyle(fontSize: 10, color: Colors.blue),
+                                    ),
+                                  ), //支付协议
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                        :Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         GestureDetector(
