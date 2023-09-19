@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:coffee/screen/bottomNavigationBar.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:http/http.dart' as http;
@@ -7,24 +8,27 @@ import 'package:coffee/component/takeFoodCardList.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../component/centerAppbar.dart';
-import '../main.dart';
 import 'package:coffee/stateManage/stateManage.dart';
-
 part 'takeFoodPage.g.dart';
 
 class TakeFood extends StatefulWidget {
-  const TakeFood({super.key});
+  TakeFood({super.key,required this.setIndex});
+  Function setIndex;
 
   @override
   State<TakeFood> createState() => _TakeFoodState();
 }
 
 class _TakeFoodState extends State<TakeFood> {
+
+
+
   @override
   Widget build(BuildContext context) {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
     final authProvider = Provider.of<AuthProvider>(context);
+    final indexProvider = Provider.of<BottomNavigationBarIndex>(context);
 
     return authProvider.isLoggedIn
         ? FutureBuilder<List<dynamic>>(
@@ -62,7 +66,7 @@ class _TakeFoodState extends State<TakeFood> {
                     ),
                   );
                 } else {
-                  return Center(
+                  return const Center(
                     child: Text('订单数据为空，如果你非新用户，请联系管理员'),
                   );
                 }
@@ -76,6 +80,26 @@ class _TakeFoodState extends State<TakeFood> {
                 titleName: '取餐',
               ),
             ),
+              body: Container(
+                height: maxHeight,
+                width: maxWidth,
+                alignment: Alignment.center,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    padding:  //内边距
+                    MaterialStateProperty.all(EdgeInsets.all(0)),
+                    shadowColor:  //阴影
+                    MaterialStateProperty.all(Colors.transparent),
+                    backgroundColor: // 背景色
+                    MaterialStateProperty.all(Colors.green),
+                  ),
+                  onPressed: ()=>{
+                    //只能重新加载一次，用状态管理导航index一定会刷新，刷新就会重新请求数据，不刷新就无法跳转页面，暂时找不到办法解决。
+                    widget.setIndex()
+                  },
+                  child: Text('去登录'),
+                ),
+              ),
           );
   }
 }
@@ -99,7 +123,7 @@ class TakeFoodObj {
 }
 
 Future<List> takeFoodPageToGetData() async {
-  // print('这是取餐页的方法被调用了');
+  print('这是取餐页的方法被调用了');
   TakeFoodObj take = TakeFoodObj(
     ShopCode: 's001',
     Page: 1,
@@ -109,7 +133,7 @@ Future<List> takeFoodPageToGetData() async {
   var url = Uri.parse('http://192.168.0.3:31000/RcApp/V1/Order/Select');
   var headers;
 
-  String? token = await getToken();
+  String? token = await getToken(); //获取Token
   if (token != null) {
     headers = {
       'Content-Type': 'application/json',

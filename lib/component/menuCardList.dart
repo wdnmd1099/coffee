@@ -267,7 +267,7 @@ class _MenuCardListState extends State<MenuCardList> {
                                             alignment: Alignment.centerRight,
                                             // color: Colors.white,
 
-                                            child: DialogWidget(
+                                            child: MaskDialog(
                                               wrapper:Container(
                                                 width: maxWidth * 0.1,
                                                 // color: Colors.yellow,

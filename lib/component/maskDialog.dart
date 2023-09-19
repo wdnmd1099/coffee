@@ -5,16 +5,16 @@ import '../stateManage/stateManage.dart';
 
 
 //此组件是一个遮罩层对话框组件，需要传入点击后触发显示对话框的按钮样式，和显示的对话框样式
-class DialogWidget extends StatefulWidget {
+class MaskDialog extends StatefulWidget {
   Widget wrapper;  //用于点击的button样式
   Widget dialogWidget ;  //点击后出现的对话框样式
-  DialogWidget({super.key, required this.dialogWidget,required this.wrapper}){}
+  MaskDialog({super.key, required this.dialogWidget,required this.wrapper}){}
 
   @override
-  _DialogWidgetState createState() => _DialogWidgetState();
+  _MaskDialogState createState() => _MaskDialogState();
 }
 
-class _DialogWidgetState extends State<DialogWidget> {
+class _MaskDialogState extends State<MaskDialog> {
   // bool _visible = false;
   //
   //

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:coffee/component/centerAppbar.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key, this.titleName,}) : super(key: key);
+  HomePage({Key? key, this.titleName, this.toOrderPage}) : super(key: key);
   String? titleName;
+  Function? toOrderPage;
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -25,43 +26,49 @@ class _MyHomePageState extends State<HomePage> {
           children: [
             Row(
               children: [
-                Container(
-                  padding:
-                  EdgeInsets.only(left: 8, top: 8, right: 4, bottom: 8),
-                  width: maxWidth / 2,
-                  height: maxHeight / 4.5,
-                  child: Container(
-                    color: Color.fromRGBO(158, 158, 158, 0.2),
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(top: maxWidth / 22.4),
-                          // color: Colors.green,
-                          child: Icon(
-                            Icons.lock,
-                            size: maxHeight * 0.1,
+                GestureDetector(
+                  onTap: ()=>{
+                    widget.toOrderPage == null? null : widget.toOrderPage!()
+                  },
+                  child:  Container(
+                    padding:
+                    EdgeInsets.only(left: 8, top: 8, right: 4, bottom: 8),
+                    width: maxWidth / 2,
+                    height: maxHeight / 4.5,
+                    child: Container(
+                      color: Color.fromRGBO(158, 158, 158, 0.2),
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(top: maxWidth / 22.4),
+                            // color: Colors.green,
+                            child: Icon(
+                              Icons.lock,
+                              size: maxHeight * 0.1,
+                            ),
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(top: maxHeight * 0.01),
-                          // color: Colors.yellow,
-                          child: Text(
-                            '门店自取',
-                            style: TextStyle(),
+                          Container(
+                            padding: EdgeInsets.only(top: maxHeight * 0.01),
+                            // color: Colors.yellow,
+                            child: Text(
+                              '门店自取',
+                              style: TextStyle(),
+                            ),
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(top: maxHeight * 0.01),
-                          // color: Colors.purple,
-                          child: Text(
-                            'PICK UP',
-                            style: TextStyle(fontSize: 8),
-                          ),
-                        )
-                      ],
+                          Container(
+                            padding: EdgeInsets.only(top: maxHeight * 0.01),
+                            // color: Colors.purple,
+                            child: Text(
+                              'PICK UP',
+                              style: TextStyle(fontSize: 8),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
+
                 Container(
                   padding:
                   EdgeInsets.only(left: 8, top: 8, right: 4, bottom: 8),

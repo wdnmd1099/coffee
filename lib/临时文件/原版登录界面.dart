@@ -3,11 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../component/centerAppbar.dart';
-import '../views/loginPage.dart';
+import '../views/chooseLoginPage.dart';
 import '../views/userPage.dart';
 import '../用户协议/payAgreement.dart';
 import '../用户协议/privacyAgreement.dart';
 import '../用户协议/userAgreement.dart';
+
+
+checkAgree(bool agree_) {
+  if (agree_ == false) {
+  } else if (agree_ == true) {
+    print('已同意');
+  }
+}
+
 
 Widget originalLoginPage(context,agree){
   double maxHeight = MediaQuery.of(context).size.height;

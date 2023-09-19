@@ -2,9 +2,10 @@ import 'package:coffee/views/takeFoodPage.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee/views/homePage.dart';
 import 'package:coffee/views/orderPage.dart';
-import 'package:coffee/views/myUserPage.dart';
 import 'package:coffee/views/userPage.dart';
-import 'package:coffee/views/takeFoodPage.dart';
+import 'package:provider/provider.dart';
+
+import '../stateManage/stateManage.dart';
 
 class bottomNavigationBar extends StatefulWidget {
   const bottomNavigationBar({super.key});
@@ -15,20 +16,30 @@ class bottomNavigationBar extends StatefulWidget {
 }
 
 class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
-  int _selectedIndex = 4;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  int _selectedIndex = 0;
+
+  void setIndex4(){
+    setState(() {
+      _selectedIndex = 4;
+    });
+  }
+  void toOrderPage(){
+    setState(() {
+      _selectedIndex = 1;
+    });
+  }
+
 
   List<Widget> bottonViews(BuildContext context, ETCcontroller) {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
 
     List<Widget> widgetOptions = <Widget>[
-      HomePage(), //首页
+      HomePage(toOrderPage: toOrderPage,), //首页
 
       OrderPage(),
 
-      TakeFood(),
+      TakeFood(setIndex: setIndex4,),
 
       Center(child: Text('未开发此页面'),),
 
@@ -38,22 +49,19 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
   }
 
   List<Widget> widgetOptions = <Widget>[
+
+    //初始化过程中无法访问函数
     HomePage(), //首页
 
     OrderPage(),
 
-    TakeFood(),
-
+    // TakeFood(setIndex: setIndex4,),
+    // Center(child: Text('未开发此页面'),),Center(child: Text('未开发此页面'),)
     Center(child: Text('未开发此页面'),),
 
     UserPage(),
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   final ExpansionTileController ETCcontroller =
       ExpansionTileController(); //折叠组件的controller
@@ -62,7 +70,6 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
   Widget build(BuildContext context) {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
-
     bool refresh = false;
 
     return MaterialApp(
@@ -77,7 +84,19 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
               ? bottonViews(context, ETCcontroller).elementAt(_selectedIndex) //会刷新页面
               : IndexedStack(  //不会刷新页面
                   index: _selectedIndex,
-                  children: widgetOptions,
+                  children: <Widget>[
+
+                    //初始化过程中无法访问函数
+                    HomePage(), //首页
+
+                    OrderPage(),
+
+                    TakeFood(setIndex: setIndex4,),
+                    // Center(child: Text('未开发此页面'),),Center(child: Text('未开发此页面'),)
+                    Center(child: Text('未开发此页面'),),
+
+                    UserPage(),
+                  ],
                 ),
         ),
         bottomNavigationBar: SizedBox(
@@ -94,7 +113,11 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
               currentIndex: _selectedIndex,
               selectedFontSize: 0,
               // selectedItemColor: Colors.amber[800],
-              onTap: _onItemTapped,
+              onTap: (index){
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
               items: const <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home),

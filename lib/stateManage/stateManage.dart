@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-
 //登录状态管理，用于检测登录状态来拉取取餐页的订单数据
 class AuthProvider with ChangeNotifier {
   bool _isLoggedIn = false;
@@ -36,6 +35,18 @@ class MaskDiaLog with ChangeNotifier {
   void off() {
     // 登出逻辑
     _isOpen = false;
+    notifyListeners();
+  }
+}
+
+//改变BottomNavigationBar的页面下标
+class BottomNavigationBarIndex with ChangeNotifier {
+  int _index = 0;
+
+  int get getIndex => _index;
+
+  void changeIndex(int index) {
+    _index = index;
     notifyListeners();
   }
 }
