@@ -96,7 +96,7 @@ class _TakeFoodState extends State<TakeFood> with AutomaticKeepAliveClientMixin 
                   ),
                   onPressed: ()=>{
                     //只能重新加载一次，用状态管理导航index一定会刷新，刷新就会重新请求数据，不刷新就无法跳转页面，暂时找不到办法解决。
-                    widget.setIndex == null? null: widget.setIndex!()
+                    widget.setIndex!()
                   },
                   child: Text('去登录'),
                 ),

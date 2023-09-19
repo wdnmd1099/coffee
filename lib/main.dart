@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Named Routes Demo',
       initialRoute: '/bottomNavigationBar',
       routes: {
-        '/bottomNavigationBar': (context) => const bottomNavigationBar(),
+        '/bottomNavigationBar': (context) => bottomNavigationBar(),
       },
     );
   }
