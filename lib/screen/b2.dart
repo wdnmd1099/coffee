@@ -55,7 +55,7 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
 
     OrderPage(),
 
-    TakeFood(),
+    // TakeFood(setIndex: setIndex4,),
     // Center(child: Text('未开发此页面'),),Center(child: Text('未开发此页面'),)
     Center(child: Text('未开发此页面'),),
 
@@ -64,7 +64,7 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
 
 
   final ExpansionTileController ETCcontroller =
-      ExpansionTileController(); //折叠组件的controller
+  ExpansionTileController(); //折叠组件的controller
 
   @override
   Widget build(BuildContext context) {
@@ -83,9 +83,21 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
           child: refresh == true
               ? bottonViews(context, ETCcontroller).elementAt(_selectedIndex) //会刷新页面
               : IndexedStack(  //不会刷新页面
-                  index: _selectedIndex,
-                  children: widgetOptions,
-                ),
+            index: _selectedIndex,
+            children: <Widget>[
+
+              //初始化过程中无法访问函数
+              HomePage(), //首页
+
+              OrderPage(),
+
+              TakeFood(setIndex: setIndex4,),
+              // Center(child: Text('未开发此页面'),),Center(child: Text('未开发此页面'),)
+              Center(child: Text('未开发此页面'),),
+
+              UserPage(),
+            ],
+          ),
         ),
         bottomNavigationBar: SizedBox(
           height: maxHeight <= 560 ? maxHeight * 0.15 : maxHeight * 0.08,

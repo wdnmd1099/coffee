@@ -17,7 +17,10 @@ class OrderPage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<OrderPage> {
+class _MyHomePageState extends State<OrderPage> with AutomaticKeepAliveClientMixin{
+
+  @override
+  bool get wantKeepAlive => true; //是否缓存
 
   @override
   Widget build(BuildContext context) {

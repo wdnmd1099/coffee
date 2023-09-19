@@ -12,16 +12,17 @@ import 'package:coffee/stateManage/stateManage.dart';
 part 'takeFoodPage.g.dart';
 
 class TakeFood extends StatefulWidget {
-  TakeFood({super.key,required this.setIndex});
-  Function setIndex;
+  TakeFood({super.key,this.setIndex});
+  Function? setIndex;
 
   @override
   State<TakeFood> createState() => _TakeFoodState();
 }
 
-class _TakeFoodState extends State<TakeFood> {
+class _TakeFoodState extends State<TakeFood> with AutomaticKeepAliveClientMixin {
 
-
+  @override
+  bool get wantKeepAlive => true; //是否缓存
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +96,7 @@ class _TakeFoodState extends State<TakeFood> {
                   ),
                   onPressed: ()=>{
                     //只能重新加载一次，用状态管理导航index一定会刷新，刷新就会重新请求数据，不刷新就无法跳转页面，暂时找不到办法解决。
-                    widget.setIndex()
+                    widget.setIndex == null? null: widget.setIndex!()
                   },
                   child: Text('去登录'),
                 ),
