@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:coffee/views/homePage.dart';
 import 'package:coffee/views/orderPage.dart';
 import 'package:coffee/views/userPage.dart';
-import 'package:provider/provider.dart';
-
-import '../stateManage/stateManage.dart';
 
 class bottomNavigationBar extends StatefulWidget {
   const bottomNavigationBar({super.key});
@@ -16,10 +13,9 @@ class bottomNavigationBar extends StatefulWidget {
 }
 
 class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
-  int _selectedIndex = 0;
-
-
+  int _selectedIndex = 2;
   List<Widget> widgetOptions = [];
+
   @override
   void initState() {
     super.initState();
@@ -34,7 +30,7 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
       });
     }
     widgetOptions = <Widget>[
-      HomePage(), //首页
+      HomePage(toOrderPage: toOrderPage,), //首页
 
       OrderPage(),
 

@@ -100,7 +100,7 @@ class _BottomNavigationBarExampleState extends State<MyUserPage> {
                           width: maxWidth * 0.3,
                           child:  ElevatedButton(
                               onPressed: () => {getSMSCode(_phoneNumber)},
-                              child: Text('获取验证码')),
+                              child: const Text('获取验证码',style: TextStyle(fontSize: 12)),),
                         ),
 
                       ),

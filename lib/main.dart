@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
 
 Future<bool> checkLogin() async {
   var token = await getToken();
-  print('这是token：$token');
+  // print('这是token：$token');
   if(token == null){return false;}
   else{
     var response = await http.get(
@@ -75,7 +75,7 @@ Future<bool> checkLogin() async {
     );
     if(response.body != null){
       Map<String, dynamic> jsonMap = json.decode(response.body);
-      print('登录代码(非0表示登录失败)：${jsonMap['Code']}');
+      // print('登录代码(非0表示登录失败)：${jsonMap['Code']}');
       if (jsonMap['Code'] == 0) {
         return true;
       }
