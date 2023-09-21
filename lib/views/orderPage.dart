@@ -8,10 +8,12 @@ import 'package:http/http.dart' as http;
 
 class OrderPage extends StatefulWidget {
   OrderPage({
-    Key? key,
+    super.key,
+    required this.setIndex,
     this.titleName,
-  }) : super(key: key);
+  });
   String? titleName;
+  Function? setIndex;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -26,7 +28,6 @@ class _MyHomePageState extends State<OrderPage> with AutomaticKeepAliveClientMix
   Widget build(BuildContext context) {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
-
     return FutureBuilder<List>(
       future: postDataToGetMenu(),
       builder: (context, snapshot) {
@@ -59,6 +60,7 @@ class _MyHomePageState extends State<OrderPage> with AutomaticKeepAliveClientMix
                       color: Colors.grey[200],
                       width: maxWidth,
                       child: MenuCardList(
+                        setIndex:widget.setIndex,
                         meun: menuData,
                       ),
                     ),

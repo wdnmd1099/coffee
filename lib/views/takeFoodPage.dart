@@ -30,7 +30,6 @@ class _TakeFoodState extends State<TakeFood> with AutomaticKeepAliveClientMixin 
     double maxWidth = MediaQuery.of(context).size.width;
     final authProvider = Provider.of<AuthProvider>(context);
     final indexProvider = Provider.of<BottomNavigationBarIndex>(context);
-
     return authProvider.isLoggedIn
         ? FutureBuilder<List<dynamic>>(
             future: takeFoodPageToGetData(),

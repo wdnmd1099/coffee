@@ -6,8 +6,8 @@ import 'maskDialog.dart';
 
 
 class MenuCardList extends StatefulWidget {
-  const MenuCardList({super.key, required this.meun});
-
+  MenuCardList({super.key, required this.meun,this.setIndex});
+  Function? setIndex;
   final List meun;
 
   @override
@@ -268,6 +268,7 @@ class _MenuCardListState extends State<MenuCardList> {
                                             // color: Colors.white,
 
                                             child: MaskDialog(
+                                              setIndex: widget.setIndex,
                                               wrapper:Container(
                                                 width: maxWidth * 0.1,
                                                 // color: Colors.yellow,

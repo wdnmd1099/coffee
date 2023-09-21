@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../component/centerAppbar.dart';
+import '../component/foodDetailsCardList.dart';
 
 class OrderDetailsPage extends StatefulWidget {
   const OrderDetailsPage({super.key});
@@ -219,7 +221,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                       padding: EdgeInsets.only(left: 8, right: 8),
                       height: maxHeight * 0.075,
                       // color: Colors.transparent,
-                      child:Container(
+                      child: Container(
                         decoration: const BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
@@ -228,38 +230,44 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                             ),
                           ),
                         ),
-                        child:  Row(
+                        child: Row(
                           children: [
-                            const Text('LINLEE林里·十字商都店',style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),),
+                            const Text(
+                              'LINLEE林里·十字商都店',
+                              style: TextStyle(
+                                  fontSize: 12, fontWeight: FontWeight.bold),
+                            ),
                             Expanded(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Container(
-                                    height:maxHeight * 0.04,
+                                    height: maxHeight * 0.04,
                                     width: maxHeight * 0.04,
                                     decoration: BoxDecoration(
                                       color: Colors.grey[200],
                                       borderRadius: BorderRadius.circular(50),
                                     ),
                                     child: Center(
-                                      child:SvgPicture.string(
+                                      child: SvgPicture.string(
                                         phone, // 替换为您自己的 SVG 字符串
                                         width: 18.0,
                                         height: 18.0,
                                       ),
                                     ),
                                   ),
-                                  const Padding(padding: EdgeInsets.only(left: 8),),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 8),
+                                  ),
                                   Container(
-                                    height:maxHeight * 0.04,
+                                    height: maxHeight * 0.04,
                                     width: maxHeight * 0.04,
                                     decoration: BoxDecoration(
                                       color: Colors.grey[200],
                                       borderRadius: BorderRadius.circular(50),
                                     ),
                                     child: Center(
-                                      child:SvgPicture.string(
+                                      child: SvgPicture.string(
                                         map, // 替换为您自己的 SVG 字符串
                                         width: 21.0,
                                         height: 21.0,
@@ -272,30 +280,76 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                           ],
                         ),
                       ),
-                    ),  //店名头部
+                    ), //店名头部
                     Container(
-                     padding: EdgeInsets.only(left: 8, right: 8),
-
-                     child: ListView(
-                       shrinkWrap: true,
-                       physics: NeverScrollableScrollPhysics(),
-                       children: [
-                         Container(
-                           padding: EdgeInsets.only(top: 8,left: 8,right: 8),
-                           child: Container(
-                             height: maxHeight * 0.1,
-                             width: maxWidth,
-                             color: Color.fromRGBO(242, 244, 251, 1),
-                           ),
-                         ),
-                       ],
-                     ),
-                   ), //订单饮品信息
+                      padding: EdgeInsets.only(left: 8, right: 8),
+                      child: ListView(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(top: 8,),
+                            child: Container(
+                              height: 64,
+                              width: maxWidth,
+                              // color: Color.fromRGBO(242, 244, 251, 1),
+                              child: FoodDetailsCardList(
+                                drinksTitle: '招牌手打柠檬茶',
+                                drinksInformation: '正常冰，三分糖',
+                                drinksNum: 2,
+                                price: 36,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(top: 8,),
+                            child: Container(
+                              height: 64,
+                              width: maxWidth,
+                              // color: Color.fromRGBO(242, 244, 251, 1),
+                              child: FoodDetailsCardList(
+                                drinksTitle: '招牌手打柠檬茶',
+                                drinksInformation: '正常冰，三分糖',
+                                drinksNum: 2,
+                                price: 36,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(top: 8,),
+                            child: Container(
+                              height: 64,
+                              width: maxWidth,
+                              // color: Color.fromRGBO(242, 244, 251, 1),
+                              child: FoodDetailsCardList(
+                                drinksTitle: '招牌手打柠檬茶',
+                                drinksInformation: '正常冰，三分糖',
+                                drinksNum: 2,
+                                price: 36,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(top: 8,),
+                            child: Container(
+                              height: 64,
+                              width: maxWidth,
+                              // color: Color.fromRGBO(242, 244, 251, 1),
+                              child: FoodDetailsCardList(
+                                drinksTitle: '招牌手打柠檬茶',
+                                drinksInformation: '正常冰，三分糖',
+                                drinksNum: 2,
+                                price: 36,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ), //订单饮品信息 高64
                     Container(
-                      padding: EdgeInsets.only(left: 8, right: 8,top: 8),
+                      padding: EdgeInsets.only(left: 8, right: 8, top: 8),
                       height: maxHeight * 0.075,
-
-                      child:Container(
+                      child: Container(
                         decoration: const BoxDecoration(
                           border: Border(
                             top: BorderSide(
@@ -308,7 +362,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                           children: [
                             Expanded(
                               child: Container(
-                                alignment:Alignment.centerRight,
+                                alignment: Alignment.centerRight,
                                 // color: Color.fromRGBO(91, 137, 254, 0.2),
                                 child: Container(
                                   alignment: Alignment.bottomRight,
@@ -321,36 +375,215 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                                         alignment: Alignment.bottomRight,
                                         height: maxHeight * 0.03,
                                         // color: Colors.blue,
-                                        child:  Text('合计：',style: TextStyle(fontSize: 12),),
+                                        child: Text(
+                                          '合计：',
+                                          style: TextStyle(fontSize: 12),
+                                        ),
                                       ),
                                       Container(
                                         alignment: Alignment.bottomRight,
                                         height: maxHeight * 0.03,
                                         // color: Colors.blue,
-                                        child: Text('￥',style: TextStyle(fontSize: 12),),
+                                        child: Text(
+                                          '￥',
+                                          style: TextStyle(fontSize: 12),
+                                        ),
                                       ),
                                       Container(
                                         alignment: Alignment.bottomRight,
                                         height: maxHeight * 0.03,
                                         // color: Colors.blue,
-                                        child: Text('36',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                                        child: Text(
+                                          '36',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
-
                                     ],
                                   ),
                                 ),
                               ),
                             ),
-
                           ],
                         ),
                       ),
-                    ),  //合计信息
+                    ), //合计信息
                   ],
                 ),
               ),
             ), //订单列表
-            Container(), //订单信息
+            Container(
+              padding: const EdgeInsets.only(bottom: 8, right: 8, left: 8),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: Colors.white,
+                  // border: Border(
+                  //     bottom: BorderSide(color: Colors.grey,width: 0.5),
+                  // ),
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.only(left: 8),
+                      height: 40,
+                      child: const Text(
+                        '订单信息',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 12),
+                      ),
+                    ), //订单信息
+                    Container(
+                      width: maxWidth - 32,
+                      height: 0.5,
+                      color: Color.fromRGBO(240, 240, 240, 1),
+                    ), //分割线
+                    Container(
+                      padding:
+                          EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
+                      child: Row(
+                        children: [
+                          Text(
+                            '订单编号',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.only(right: 8),
+                                  child: Text(
+                                    'DJAOID229048390385',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Clipboard.setData(
+                                      ClipboardData(text: 'DJAOID229048390385'),
+                                    );
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.only(
+                                        left: 6, right: 6, top: 0, bottom: 2),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        width: 1,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      '复制',
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ), //订单编号
+                    Container(
+                      padding: EdgeInsets.only(right: 8, left: 8, bottom: 8),
+                      child: Row(
+                        children: [
+                          Text(
+                            '下单时间',
+                            style: TextStyle(fontSize: 10, color: Colors.grey),
+                          ),
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  '2023-01-01 22:22:22',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ), //下单时间
+                    Container(
+                      padding: EdgeInsets.only(right: 8, left: 8, bottom: 8),
+                      child: Row(
+                        children: [
+                          Text(
+                            '支付方式',
+                            style: TextStyle(fontSize: 10, color: Colors.grey),
+                          ),
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  '微信支付',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ), //支付方式
+                    Container(
+                      padding: EdgeInsets.only(right: 8, left: 8, bottom: 8),
+                      child: Row(
+                        children: [
+                          Text(
+                            '支付金额',
+                            style: TextStyle(fontSize: 10, color: Colors.grey),
+                          ),
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  '微信支付:￥36.00',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ), //支付金额
+                    Container(
+                      padding: EdgeInsets.only(right: 8, left: 8, bottom: 8),
+                      child: Row(
+                        children: [
+                          Text(
+                            '备注信息',
+                            style: TextStyle(fontSize: 10, color: Colors.grey),
+                          ),
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  '无',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ), //备注信息
+                  ],
+                ),
+              ),
+            ), //订单信息
             Container(), //退款文字
           ],
         ),

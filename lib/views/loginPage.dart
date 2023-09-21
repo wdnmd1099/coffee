@@ -190,7 +190,7 @@ Future<dynamic> signIn(_phoneNumber, _smsCode, _authProvider) async {
   if(onLine == false){
     //下面是离线状态下的Token------------------------------
     // 这个是有订单数据的
-    saveToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJZCI6NywiQ29udGV4dElkIjoiYTY2YWRlYzEtNmFmMC00YTAwLTljNjItZGNlMTg0NGYzYTI3IiwiRGV2aWNlIjoiIiwiT3BlcmF0b3JJZCI6NTB9.JRcjZSHnB3aU8MsAdU_zqJ4N_H_jTtOOJHqSv0RGFYg");
+    saveToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJZCI6NywiQ29udGV4dElkIjoiNjFiYjg5NjMtY2I4MS00NmRmLWEyNjgtM2M4ZGU0MmYzNTFjIiwiRGV2aWNlIjoiIiwiT3BlcmF0b3JJZCI6NTB9.11hS2NI4xj32NS7e_uiHK4AUXrmGK1SwjZFbhmHLz6k");
     _authProvider.login();
     //这给是没有订单数据的
     // saveToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJZCI6NywiQ29udGV4dElkIjoiMzg5NzQ2NjctYjU3OS00YzdiLWE0OGQtNWI3NDNiZjQ1NTUyIiwiRGV2aWNlIjoiIiwiT3BlcmF0b3JJZCI6ODN9.ux_-fOF87O8QeMKyKUCFBvmVdrKxM8g5XBKG31zvbbI');

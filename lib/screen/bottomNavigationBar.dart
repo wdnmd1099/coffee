@@ -32,7 +32,7 @@ class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
     widgetOptions = <Widget>[
       HomePage(toOrderPage: toOrderPage,), //首页
 
-      OrderPage(),
+      OrderPage(setIndex: setIndex4,),
 
       TakeFood(setIndex: setIndex4,),
 
