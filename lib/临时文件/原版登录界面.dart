@@ -10,6 +10,7 @@ import '../用户协议/privacyAgreement.dart';
 import '../用户协议/userAgreement.dart';
 
 
+
 checkAgree(bool agree_) {
   if (agree_ == false) {
   } else if (agree_ == true) {

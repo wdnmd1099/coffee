@@ -78,7 +78,7 @@ class _BottomNavigationBarExampleState extends State<CheckoutBar> {
                                     ),
                                   ),
                                   child:Center(
-                                    child:  Text('0'),
+                                    child: Text('0'),
                                   ),
                                 ),
 

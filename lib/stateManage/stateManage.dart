@@ -50,3 +50,39 @@ class BottomNavigationBarIndex with ChangeNotifier {
     notifyListeners();
   }
 }
+
+//下单饮料的选配信息
+class DrinksOptions with ChangeNotifier {
+  List _drinksOptions = [];
+
+  List get getOptions => _drinksOptions;
+
+  void changeOptions(Map options) {
+    _drinksOptions.add(options);
+    notifyListeners();
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

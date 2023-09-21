@@ -8,9 +8,10 @@ import '../用户协议/privacyAgreement.dart';
 import 'loginPage.dart';
 
 class ForJumpPage extends StatefulWidget {
-  ForJumpPage({super.key, required this.title,required this.inside});
+  ForJumpPage({super.key, required this.title,required this.inside,this.titleCenter});
   Widget inside;
   String title;
+  bool? titleCenter = true;
 
   @override
   State<ForJumpPage> createState() => _ForJumpPageState();
@@ -34,7 +35,7 @@ class _ForJumpPageState extends State<ForJumpPage> {
           child: CenterAppbar(
             titleName: '${widget.title}',
             back: true,
-            center: true,
+            center: widget.titleCenter,
           ),
         ), //头部
         body: widget.inside,

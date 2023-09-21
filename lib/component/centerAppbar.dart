@@ -74,9 +74,12 @@ class _MyHomePageState extends State<CenterAppbar> {
                     ),
                   ),
                   Center(
-                    child: Text(
-                      widget.titleName,
-                      style: const TextStyle(fontSize: 16, color: Colors.black),
+                    child: Container(
+                      padding: EdgeInsets.only(bottom: 2),
+                      child: Text(
+                        widget.titleName,
+                        style: const TextStyle(fontSize: 16, color: Colors.black),
+                      ),
                     ),
                   ),
                 ],

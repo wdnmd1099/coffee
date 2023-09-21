@@ -15,6 +15,8 @@ void main() {
         ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
         ChangeNotifierProvider<MaskDiaLog>(create: (_) => MaskDiaLog()),
         ChangeNotifierProvider<BottomNavigationBarIndex>(create: (_) => BottomNavigationBarIndex()),
+        ChangeNotifierProvider<DrinksOptions>(create: (_) => DrinksOptions()),
+
       ],
       child: MyApp(),
     ),

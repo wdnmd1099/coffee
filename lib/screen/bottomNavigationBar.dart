@@ -13,7 +13,7 @@ class bottomNavigationBar extends StatefulWidget {
 }
 
 class _BottomNavigationBarExampleState extends State<bottomNavigationBar> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 1;
   List<Widget> widgetOptions = [];
 
   @override
