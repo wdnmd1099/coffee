@@ -7,14 +7,14 @@ import '../component/centerAppbar.dart';
 import '../用户协议/privacyAgreement.dart';
 import 'loginPage.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class ChooseLoginPage extends StatefulWidget {
+  const ChooseLoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _BottomNavigationBarExampleState();
+  State<ChooseLoginPage> createState() => _ChooseLoginPageState();
 }
 
-class _BottomNavigationBarExampleState extends State<LoginPage> {
+class _ChooseLoginPageState extends State<ChooseLoginPage> {
   bool agree = false;
   bool isShowToast = true;
 
@@ -88,7 +88,7 @@ class _BottomNavigationBarExampleState extends State<LoginPage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  MyUserPage()),
+                                                  LoginPage()),
                                         );
                                       }
                                     },

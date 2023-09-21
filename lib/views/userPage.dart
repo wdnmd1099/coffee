@@ -5,8 +5,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../component/centerAppbar.dart';
 import '../stateManage/stateManage.dart';
+
 // import '../临时文件/原版登录界面.dart';
 import 'chooseLoginPage.dart';
+import 'forJumpPage.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});
@@ -90,7 +92,7 @@ class _BottomNavigationBarExampleState extends State<UserPage> {
                               context,
                               PageRouteBuilder(
                                 transitionDuration: Duration(milliseconds: 150),
-                                pageBuilder: (_, __, ___) => const LoginPage(),
+                                pageBuilder: (_, __, ___) => const ChooseLoginPage(),
                                 transitionsBuilder: (_, animation, __, child) {
                                   return SlideTransition(
                                     position: Tween(
@@ -175,7 +177,59 @@ class _BottomNavigationBarExampleState extends State<UserPage> {
                 child: Column(
                   children: [
                     ListTile(
-                      onTap: () => {backPrint('充值记录')},
+                      onTap: (){
+                        Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          transitionDuration: Duration(milliseconds: 150),
+                          pageBuilder: (_, __, ___) =>
+                              ForJumpPage(title: '余额明细',
+                                inside:Container(
+                            color: Color.fromRGBO(238, 238, 238, 1),
+                            height: maxHeight,
+                            width: maxWidth,
+                            child: DefaultTabController(
+                              length: 3,
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      color: Colors.white,
+                                      height: maxHeight * 0.06,
+                                      child: TabBar(
+                                        labelColor:Colors.blue,
+                                        unselectedLabelColor: Colors.black,
+                                        tabs: [
+                                          Text('全部'),
+                                          Text('充值记录'),
+                                          Text('消费记录'),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: TabBarView(
+                                        children: [
+                                          Text('1'),Text('2'),Text('3'),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                              ),
+                          transitionsBuilder: (_, animation, __, child) {
+                            return SlideTransition(
+                              position: Tween(
+                                begin: Offset(1.0, 0.0),
+                                end: Offset.zero,
+                              ).animate(animation),
+                              child: child,
+                            );
+                          },
+                        ),
+                      );},
                       leading: SvgPicture.string(
                         record, // 替换为您自己的 SVG 字符串
                         width: 24.0, // 设置 SVG 图像的宽度
@@ -191,7 +245,28 @@ class _BottomNavigationBarExampleState extends State<UserPage> {
                       ),
                     ),
                     ListTile(
-                      onTap: () => {backPrint('联系我们')},
+                      onTap: (){
+                        Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          transitionDuration: Duration(milliseconds: 150),
+                          pageBuilder: (_, __, ___) =>
+                              ForJumpPage(title: '联系我们',
+                                inside:Container(
+                                  child: Text('联系方式:13000000000'),
+                                ),
+                              ),
+                          transitionsBuilder: (_, animation, __, child) {
+                            return SlideTransition(
+                              position: Tween(
+                                begin: Offset(1.0, 0.0),
+                                end: Offset.zero,
+                              ).animate(animation),
+                              child: child,
+                            );
+                          },
+                        ),
+                      ); },
                       leading: SvgPicture.string(
                         contact, // 替换为您自己的 SVG 字符串
                         width: 24.0, // 设置 SVG 图像的宽度
@@ -201,13 +276,35 @@ class _BottomNavigationBarExampleState extends State<UserPage> {
                         '联系我们',
                         style: TextStyle(fontSize: 14),
                       ),
-                      trailing:const Text(
+                      trailing: const Text(
                         '>',
                         style: TextStyle(fontSize: 24),
                       ),
                     ),
                     ListTile(
-                      onTap: () => {backPrint('反馈中心')},
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            transitionDuration: Duration(milliseconds: 150),
+                            pageBuilder: (_, __, ___) =>
+                                ForJumpPage(title: '反馈中心',
+                                  inside:Container(
+                                    child: Text('联系方式:13000000000'),
+                                  ),
+                                ),
+                            transitionsBuilder: (_, animation, __, child) {
+                              return SlideTransition(
+                                position: Tween(
+                                  begin: Offset(1.0, 0.0),
+                                  end: Offset.zero,
+                                ).animate(animation),
+                                child: child,
+                              );
+                            },
+                          ),
+                        );
+                      },
                       leading: SvgPicture.string(
                         feedback, // 替换为您自己的 SVG 字符串
                         width: 24.0, // 设置 SVG 图像的宽度
@@ -226,12 +323,10 @@ class _BottomNavigationBarExampleState extends State<UserPage> {
                         ? ListTile(
                             onTap: () => showDialog<String>(
                               context: context,
-                              builder: (BuildContext context) => 
-                                
-                               Dialog(
-                                  child: Padding(
-                                    padding: EdgeInsets.only(top: 12),
-                                    child: Column(
+                              builder: (BuildContext context) => Dialog(
+                                child: Padding(
+                                  padding: EdgeInsets.only(top: 12),
+                                  child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
@@ -256,16 +351,18 @@ class _BottomNavigationBarExampleState extends State<UserPage> {
                                             // color: Colors.red,
                                             child: Container(
                                               // padding:const EdgeInsets.only(bottom: 12),
-                                              height:42,
+                                              height: 42,
                                               decoration: const BoxDecoration(
                                                 border: Border(
                                                   top: BorderSide(
                                                     width: 0.5,
-                                                    color:Color.fromRGBO(204, 204, 204, 0.5),
+                                                    color: Color.fromRGBO(
+                                                        204, 204, 204, 0.5),
                                                   ),
                                                   left: BorderSide(
-                                                    width:0.5,
-                                                    color:Color.fromRGBO(204, 204, 204, 0.5),
+                                                    width: 0.5,
+                                                    color: Color.fromRGBO(
+                                                        204, 204, 204, 0.5),
                                                   ),
                                                 ),
                                               ),
@@ -280,17 +377,19 @@ class _BottomNavigationBarExampleState extends State<UserPage> {
                                           ),
                                           Expanded(
                                             child: Container(
-                                              height:42,
+                                              height: 42,
                                               // padding:const EdgeInsets.only(bottom: 12),
                                               decoration: const BoxDecoration(
                                                 border: Border(
                                                   top: BorderSide(
                                                     width: 0.5,
-                                                    color:Color.fromRGBO(204, 204, 204, 0.5),
+                                                    color: Color.fromRGBO(
+                                                        204, 204, 204, 0.5),
                                                   ),
                                                   left: BorderSide(
-                                                    width:0.5,
-                                                    color:Color.fromRGBO(204, 204, 204, 0.5),
+                                                    width: 0.5,
+                                                    color: Color.fromRGBO(
+                                                        204, 204, 204, 0.5),
                                                   ),
                                                 ),
                                               ),
@@ -306,9 +405,8 @@ class _BottomNavigationBarExampleState extends State<UserPage> {
                                       ),
                                     ],
                                   ),
-                                  ),
                                 ),
-                              
+                              ),
                             ),
                             leading: SvgPicture.string(
                               logout, // 替换为您自己的 SVG 字符串
@@ -338,11 +436,10 @@ void backPrint(String text) {
   print(text);
 }
 
-
 removeToken(authProvider_) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final bool userToken = await prefs.remove('userToken');
-  if(userToken == false){
+  if (userToken == false) {
     throw 'userToken删除失败，也许是userToken不存在';
   }
   authProvider_.logout();

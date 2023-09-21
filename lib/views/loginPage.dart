@@ -13,14 +13,14 @@ import '../component/centerAppbar.dart';
 
 
 
-class MyUserPage extends StatefulWidget {
-  const MyUserPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<MyUserPage> createState() => _BottomNavigationBarExampleState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _BottomNavigationBarExampleState extends State<MyUserPage> {
+class _LoginPageState extends State<LoginPage> {
   int _phoneNumber = 0;
   int _smsCode = 0;
 
