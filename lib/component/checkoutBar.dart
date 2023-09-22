@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:provider/provider.dart';
 
 import '../stateManage/stateManage.dart';
+import '../views/settlementPage.dart';
 
 class CheckoutBar extends StatefulWidget {
   const CheckoutBar({super.key});
@@ -83,7 +85,7 @@ class _CheckoutBarState extends State<CheckoutBar> {
                                     ),
                                   ),
                                   child:Center(
-                                    child: Text('${1}'),
+                                    child: Text('${drinksOptions.getAllData[0]['allCount']}',style: TextStyle(fontSize: 10),),
                                   ),
                                 ),
 
@@ -94,7 +96,7 @@ class _CheckoutBarState extends State<CheckoutBar> {
                                   child: Row(
                                     children: [
                                       Text('￥'),
-                                      Text('${1}'),
+                                      Text('${drinksOptions.getAllData[0]['allPrice'].toStringAsFixed(2)}'),
                                     ],
                                   ),
                                 ),
@@ -107,6 +109,32 @@ class _CheckoutBarState extends State<CheckoutBar> {
                         child:
                         GestureDetector(
                           onTap: (){
+                            if(drinksOptions.getOptions.isEmpty){
+                              showToast('请先添加购物车',
+                                  duration:const Duration(milliseconds: 1000),
+                                  textStyle:const TextStyle(fontSize: 12,color: Colors.white),
+                                  context: context,
+                                  animation: StyledToastAnimation.fade,
+                                  curve: Curves.linear,
+                                  reverseCurve: Curves.linear);
+                            }else if(drinksOptions.getOptions.isNotEmpty){
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  transitionDuration: Duration(milliseconds: 150),
+                                  pageBuilder: (_, __, ___) => SettlementPage(),
+                                  transitionsBuilder: (_, animation, __, child) {
+                                    return SlideTransition(
+                                      position: Tween(
+                                        begin: Offset(1.0, 0.0),  // (1.0,0.0)是从右到左出现
+                                        end: Offset.zero,
+                                      ).animate(animation),
+                                      child: child,
+                                    );
+                                  },
+                                ),
+                              );
+                            }
 
                           },
                           child: Container(
@@ -117,14 +145,14 @@ class _CheckoutBarState extends State<CheckoutBar> {
                               child: Container(
                                 height: maxHeight,
                                 width: maxWidth * 0.2,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: Color.fromRGBO(51, 228, 228,0.6),
                                   borderRadius: BorderRadius.only(
                                     bottomRight: Radius.circular(50),
                                     topRight: Radius.circular(50),
                                   ),
                                 ),
-                                child: Align(
+                                child: const Align(
                                   alignment: Alignment.center,
                                   child: Text('去结算',style: TextStyle(color: Colors.white,),),
                                 ),

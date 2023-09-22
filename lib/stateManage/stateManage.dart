@@ -53,8 +53,8 @@ class BottomNavigationBarIndex with ChangeNotifier {
 
 //下单饮料的选配信息
 class DrinksOptions with ChangeNotifier {
-  final List _drinksOptions = [];
-  final List _allData = [{'allCount':0,'allPrice':0.0},];
+  List _drinksOptions = [];
+  List _allData = [{'allCount':0,'allPrice':0.0},];
   List get getOptions => _drinksOptions;
   List get getAllData => _allData;
 
@@ -66,6 +66,12 @@ class DrinksOptions with ChangeNotifier {
 
   void changeOptions(Map options) {
     _drinksOptions.add(options);
+    notifyListeners();
+  }
+
+  void reset() {
+    _drinksOptions = [];
+    _allData = [{'allCount':0,'allPrice':0.0},];
     notifyListeners();
   }
 }
