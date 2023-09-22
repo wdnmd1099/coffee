@@ -196,10 +196,13 @@ class _OptionsPageState extends State<OptionsPage> {
                                   else if(count > 0){
                                     for(int i=0;i<temporaryList.length;i++){
                                       drinksOptions.changeOptions(temporaryList[i]);
-                                      drinksOptions.addAllCount(true, double.parse(widget.childrenItem['Price'].toString()));
+                                      drinksOptions.addAllCount(true,
+                                          count * double.parse(widget.childrenItem['Price'].toString()),
+                                          count,
+                                      );
                                     }
-                                    print(drinksOptions.getOptions);
-                                    // print(drinksOptions.getAllData);
+                                    // print(drinksOptions.getOptions);
+                                    print(drinksOptions.getAllData);
                                     showToast('已添加到购物车',
                                         duration:const Duration(milliseconds: 1000),
                                         textStyle:const TextStyle(fontSize: 12,color: Colors.white),

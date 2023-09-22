@@ -58,8 +58,8 @@ class DrinksOptions with ChangeNotifier {
   List get getOptions => _drinksOptions;
   List get getAllData => _allData;
 
-  void addAllCount(bool addOrReduce,double currentDrinkPrice){
-    addOrReduce? _allData[0]['allCount'] += 1: _allData[0]['allCount'] -= 1;
+  void addAllCount(bool addOrReduce,double currentDrinkPrice ,int currentCount){
+    addOrReduce? _allData[0]['allCount'] += currentCount: _allData[0]['allCount'] -= currentCount;
     addOrReduce? _allData[0]['allPrice'] += currentDrinkPrice :  _allData[0]['allPrice'] -= currentDrinkPrice;
     notifyListeners();
   }
