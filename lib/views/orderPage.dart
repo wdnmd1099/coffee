@@ -5,6 +5,9 @@ import 'package:coffee/component/menuCardList.dart';
 // import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+
+import '../stateManage/stateManage.dart';
 
 class OrderPage extends StatefulWidget {
   OrderPage({
@@ -28,7 +31,6 @@ class _MyHomePageState extends State<OrderPage> with AutomaticKeepAliveClientMix
   Widget build(BuildContext context) {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
-
 
     return FutureBuilder<List>(
       future: postDataToGetMenu(),
@@ -68,7 +70,7 @@ class _MyHomePageState extends State<OrderPage> with AutomaticKeepAliveClientMix
                     ),
                   ),
                   //ListView的菜单界面
-                  const CheckoutBar(), //去结算bar
+                  CheckoutBar(), //去结算bar
                 ],
               ),
             ),

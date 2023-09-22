@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../stateManage/stateManage.dart';
 
 class CheckoutBar extends StatefulWidget {
   const CheckoutBar({super.key});
-
   @override
   State<CheckoutBar> createState() =>
-      _BottomNavigationBarExampleState();
+      _CheckoutBarState();
 }
 
-class _BottomNavigationBarExampleState extends State<CheckoutBar> {
+class _CheckoutBarState extends State<CheckoutBar> {
+
   @override
   Widget build(BuildContext context) {
     double maxHeight = MediaQuery.of(context).size.height;
     double maxWidth = MediaQuery.of(context).size.width;
+    final drinksOptions = Provider.of<DrinksOptions>(context);
+
     return Container(
       padding: EdgeInsets.only(
         left: maxWidth * 0.05,
@@ -78,7 +83,7 @@ class _BottomNavigationBarExampleState extends State<CheckoutBar> {
                                     ),
                                   ),
                                   child:Center(
-                                    child: Text('0'),
+                                    child: Text('${1}'),
                                   ),
                                 ),
 
@@ -89,7 +94,7 @@ class _BottomNavigationBarExampleState extends State<CheckoutBar> {
                                   child: Row(
                                     children: [
                                       Text('￥'),
-                                      Text('0'),
+                                      Text('${1}'),
                                     ],
                                   ),
                                 ),
@@ -99,28 +104,35 @@ class _BottomNavigationBarExampleState extends State<CheckoutBar> {
                         ),
                       ),
                       Positioned(
-                        child: Container(
-                          // color: Colors.green,
-                          height: maxHeight,
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Container(
-                              height: maxHeight,
-                              width: maxWidth * 0.2,
-                              decoration: BoxDecoration(
-                                color: Color.fromRGBO(51, 228, 228,0.6),
-                                borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(50),
-                                  topRight: Radius.circular(50),
+                        child:
+                        GestureDetector(
+                          onTap: (){
+
+                          },
+                          child: Container(
+                            // color: Colors.green,
+                            height: maxHeight,
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: Container(
+                                height: maxHeight,
+                                width: maxWidth * 0.2,
+                                decoration: BoxDecoration(
+                                  color: Color.fromRGBO(51, 228, 228,0.6),
+                                  borderRadius: BorderRadius.only(
+                                    bottomRight: Radius.circular(50),
+                                    topRight: Radius.circular(50),
+                                  ),
                                 ),
-                              ),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text('去结算',style: TextStyle(color: Colors.white,),),
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text('去结算',style: TextStyle(color: Colors.white,),),
+                                ),
                               ),
                             ),
                           ),
                         ),
+
                       ),
                     ],
                   ),
