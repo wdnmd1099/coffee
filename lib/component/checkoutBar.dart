@@ -85,7 +85,7 @@ class _CheckoutBarState extends State<CheckoutBar> {
                                     ),
                                   ),
                                   child:Center(
-                                    child: Text('${drinksOptions.getAllData[0]['allCount']}',style: TextStyle(fontSize: 10),),
+                                    child: Text('${drinksOptions.getAllData[0]['allCount']}',style: TextStyle(fontSize: 10,color: Colors.white),),
                                   ),
                                 ),
 

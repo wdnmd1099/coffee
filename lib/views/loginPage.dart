@@ -10,9 +10,6 @@ import '../screen/bottomNavigationBar.dart';
 import 'userPage.dart';
 import '../component/centerAppbar.dart';
 
-
-
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -30,10 +27,9 @@ class _LoginPageState extends State<LoginPage> {
     double maxWidth = MediaQuery.of(context).size.width;
     final authProvider = Provider.of<AuthProvider>(context);
     return Material(
-      child:  Scaffold(
+      child: Scaffold(
         appBar: PreferredSize(
-          preferredSize:
-          Size.fromHeight(maxHeight * 0.05), //Appbar高度
+          preferredSize: Size.fromHeight(maxHeight * 0.05), //Appbar高度
           child: CenterAppbar(
             titleName: '手机号登录',
             back: true,
@@ -60,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                   onChanged: (value) {
                     // print(value.length);
                     setState(
-                          () {
+                      () {
                         _phoneNumber = int.tryParse(value)!;
                       },
                     );
@@ -80,7 +76,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   onChanged: (value) {
                     setState(
-                          () {_smsCode = int.tryParse(value)!;
+                      () {
+                        _smsCode = int.tryParse(value)!;
                       },
                     );
                   },
@@ -93,33 +90,34 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Container(
                       width: maxWidth * 0.5,
-                      child:
-                      Center(
-                        child:
-                        Container(
+                      child: Center(
+                        child: Container(
                           width: maxWidth * 0.3,
-                          child:  ElevatedButton(
-                              onPressed: () => {getSMSCode(_phoneNumber)},
-                              child: const Text('获取验证码',style: TextStyle(fontSize: 12)),),
+                          child: ElevatedButton(
+                            onPressed: () => {getSMSCode(_phoneNumber)},
+                            child: const Text('获取验证码',
+                                style: TextStyle(fontSize: 12)),
+                          ),
                         ),
-
                       ),
                     ),
                     Container(
                       width: maxWidth * 0.5,
-                      child:
-                      Center(
-                        child:
-                        Container(
+                      child: Center(
+                        child: Container(
                           width: maxWidth * 0.3,
-                          child:  ElevatedButton(
+                          child: ElevatedButton(
                               onPressed: () => {
-                                signIn(_phoneNumber, _smsCode, authProvider),
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => bottomNavigationBar()),
-                                ),
-                              },
+                                    signIn(
+                                        _phoneNumber, _smsCode, authProvider),
+                                Navigator.of(context).pushAndRemoveUntil(
+                                  // 返回到指定的路由（Tabs为页面组件，需要在顶部引入，index为组件的参数)
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                        const bottomNavigationBar()),
+                                    // 清空路由
+                                        (route) => route == null)
+                                  },
                               child: Text('登录')),
                         ),
                       ),
@@ -135,19 +133,14 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-
-
     );
-
-
   }
 }
 
-tok (_authProvider)  {
+tok(_authProvider) {
   _authProvider.logout();
   // print('应该刷新了');
 }
-
 
 class GetCode {
   String phoneNumberCountryCode = '86';
@@ -187,17 +180,17 @@ Future<dynamic> getSMSCode(_phoneNumber) async {
 
 Future<dynamic> signIn(_phoneNumber, _smsCode, _authProvider) async {
   bool onLine = false;
-  if(onLine == false){
+  if (onLine == false) {
     //下面是离线状态下的Token------------------------------
     // 这个是有订单数据的
-    saveToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJZCI6NywiQ29udGV4dElkIjoiNjFiYjg5NjMtY2I4MS00NmRmLWEyNjgtM2M4ZGU0MmYzNTFjIiwiRGV2aWNlIjoiIiwiT3BlcmF0b3JJZCI6NTB9.11hS2NI4xj32NS7e_uiHK4AUXrmGK1SwjZFbhmHLz6k");
+    saveToken(
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJZCI6NywiQ29udGV4dElkIjoiNjFiYjg5NjMtY2I4MS00NmRmLWEyNjgtM2M4ZGU0MmYzNTFjIiwiRGV2aWNlIjoiIiwiT3BlcmF0b3JJZCI6NTB9.11hS2NI4xj32NS7e_uiHK4AUXrmGK1SwjZFbhmHLz6k");
     _authProvider.login();
     //这给是没有订单数据的
     // saveToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJZCI6NywiQ29udGV4dElkIjoiMzg5NzQ2NjctYjU3OS00YzdiLWE0OGQtNWI3NDNiZjQ1NTUyIiwiRGV2aWNlIjoiIiwiT3BlcmF0b3JJZCI6ODN9.ux_-fOF87O8QeMKyKUCFBvmVdrKxM8g5XBKG31zvbbI');
     // _authProvider.login();
     //-----------------------------------------------
-  }
-  else if(onLine == true){
+  } else if (onLine == true) {
     // 创建POST请求的body对象
     GetCode sI = GetCode(
         phoneNumber: _phoneNumber.toString(), smsCode: _smsCode.toString());
@@ -219,11 +212,11 @@ Future<dynamic> signIn(_phoneNumber, _smsCode, _authProvider) async {
       body: sIStr,
     );
 
-    if(response.body != null){
+    if (response.body != null) {
       Map<String, dynamic> token = jsonDecode(response.body);
-      if(token['Data'] == ''){
+      if (token['Data'] == '') {
         throw Exception('Data为空，请检查请求是否正确');
-      }else{
+      } else {
         // print(token['Data']['Token']);
         //保存Token到磁盘
         saveToken(token['Data']['Token']);
@@ -231,17 +224,11 @@ Future<dynamic> signIn(_phoneNumber, _smsCode, _authProvider) async {
         // String? userToken = await getToken();
         // print(userToken);
       }
-
-    }else{
+    } else {
       throw Exception('Request failed with status: ${response.statusCode}');
     }
   }
-
-
 }
-
-
-
 
 //保存Token
 void saveToken(String token) async {
