@@ -184,35 +184,6 @@ test(DrinksOptions drinksOptions){
                               ),
                               onPressed: (){
                                 setState(() {
-                                  // 剩下传入状态管理和同步数目
-                                  //   List hasDrink = [];
-                                  //   if(temporaryList.isEmpty){
-                                  //     addTemporaryData(1,drinksOptions);
-                                  //     drinksOptions.changeOptions(
-                                  //         temporaryList[0]
-                                  //     );
-                                  //   }else if(temporaryList.isNotEmpty){
-                                  //    for(int i=0;i<temporaryList.length;i++){
-                                  //      if(temporaryList[i]['id'] == widget.childrenItem['Id']){
-                                  //        if(changeIcon == temporaryList[i]['hotOrCold']){
-                                  //          temporaryList[i]['count'] += 1;
-                                  //
-                                  //          // print(temporaryList);
-                                  //        }
-                                  //        else if(changeIcon != temporaryList[i]['hotOrCold']){
-                                  //          hasDrink.add(false);
-                                  //          if(hasDrink.length == temporaryList.length){
-                                  //            addTemporaryData(0,drinksOptions);
-                                  //            drinksOptions.changeOptions(
-                                  //              temporaryList[1]
-                                  //            );
-                                  //          }
-                                  //        }
-                                  //      }
-                                  //    }
-                                  //   }
-                                    // print(temporaryList);
-
                                   //在状态管理找出有没有相同ID的元素
                                   //有就再判断该元素的温度是否等于当前温度，如果有其他属性就加上其他属性的判断，等于当前温度直接修改数量，
                                   //不等于的话就看当前ID的元素是否全部都不具备当前温度，是的话就添加新元素。
@@ -272,22 +243,6 @@ test(DrinksOptions drinksOptions){
                                   // print(stateLsit);
 
                                 drinksOptions.computeAllCountAndPrice();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                                 });
                               },
