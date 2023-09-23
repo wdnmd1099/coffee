@@ -54,7 +54,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                 ),
                 child: Column(
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(top: 8),
                       child: Text(
                         '取餐码',
@@ -101,7 +101,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                               Container(
                                 height: maxHeight * 0.0375,
                                 child: SvgPicture.string(
-                                  colorFilter: ColorFilter.mode(
+                                  colorFilter:  const ColorFilter.mode(
                                       Colors.green, BlendMode.modulate),
                                   ordered, // 替换为您自己的 SVG 字符串
                                   width: 24.0, // 设置 SVG 图像的宽度
@@ -113,7 +113,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                                 height: maxHeight * 0.0375,
                                 color: Colors.transparent,
                                 // padding: EdgeInsets.only(top: 8),
-                                child: Text(
+                                child:  const Text(
                                   '已下单',
                                   style: TextStyle(
                                       fontSize: 12, color: Colors.green),
@@ -218,7 +218,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                 child: Column(
                   children: [
                     Container(
-                      padding: EdgeInsets.only(left: 8, right: 8),
+                      padding:  const EdgeInsets.only(left: 8, right: 8),
                       height: maxHeight * 0.075,
                       // color: Colors.transparent,
                       child: Container(
@@ -282,13 +282,13 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                       ),
                     ), //店名头部
                     Container(
-                      padding: EdgeInsets.only(left: 8, right: 8),
+                      padding:  const EdgeInsets.only(left: 8, right: 8),
                       child: ListView(
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics:  const NeverScrollableScrollPhysics(),
                         children: [
                           Container(
-                            padding: EdgeInsets.only(top: 8,),
+                            padding:  const EdgeInsets.only(top: 8,),
                             child: Container(
                               height: 64,
                               width: maxWidth,
@@ -302,7 +302,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.only(top: 8,),
+                            padding:  const EdgeInsets.only(top: 8,),
                             child: Container(
                               height: 64,
                               width: maxWidth,
@@ -316,7 +316,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.only(top: 8,),
+                            padding:  const EdgeInsets.only(top: 8,),
                             child: Container(
                               height: 64,
                               width: maxWidth,
@@ -330,7 +330,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.only(top: 8,),
+                            padding:  const EdgeInsets.only(top: 8,),
                             child: Container(
                               height: 64,
                               width: maxWidth,
@@ -347,7 +347,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                       ),
                     ), //订单饮品信息 高64
                     Container(
-                      padding: EdgeInsets.only(left: 8, right: 8, top: 8),
+                      padding:  const EdgeInsets.only(left: 8, right: 8, top: 8),
                       height: maxHeight * 0.075,
                       child: Container(
                         decoration: const BoxDecoration(

@@ -29,6 +29,8 @@ void main() {
 bool yes = false;
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -58,7 +60,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Named Routes Demo',
       initialRoute: '/bottomNavigationBar',
       routes: {
-        '/bottomNavigationBar': (context) => bottomNavigationBar(),
+        '/bottomNavigationBar': (context) => const bottomNavigationBar(),
       },
     );
   }
@@ -67,12 +69,15 @@ class _MyAppState extends State<MyApp> {
 Future<bool> checkLogin() async {
   var token = await getToken();
   // print('这是token：$token');
+
+  // 如果没有token，说明是首次登陆，什么都不做
   if(token == null){return false;}
+  // 如果有token，就去服务器验证此token有没有过期，没有过期就直接使用，过期了就当没登录
   else{
     var response = await http.get(
       Uri.parse('http://192.168.0.3:31000/RcApp/V1/Operator/GetInfo'),
       headers: {
-        'X-API-TOKEN': '$token',
+        'X-API-TOKEN': token,
       },
     );
     if(response.body != null){

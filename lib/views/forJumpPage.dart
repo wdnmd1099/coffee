@@ -33,7 +33,7 @@ class _ForJumpPageState extends State<ForJumpPage> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(maxHeight * 0.05), //Appbar高度
           child: CenterAppbar(
-            titleName: '${widget.title}',
+            titleName: widget.title,
             back: true,
             center: widget.titleCenter,
           ),

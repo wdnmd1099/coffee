@@ -88,7 +88,7 @@ class _ChooseLoginPageState extends State<ChooseLoginPage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  LoginPage()),
+                                                  const LoginPage()),
                                         );
                                       }
                                     },
@@ -165,7 +165,7 @@ class _ChooseLoginPageState extends State<ChooseLoginPage> {
                                     ? Container(
                                   // color: Colors.red,
                                   padding:
-                                  EdgeInsets.only(top: 3),
+                                  const EdgeInsets.only(top: 3),
                                   child: SvgPicture.string(
                                     yesIcon, // 替换为您自己的 SVG 图像路径
                                     width: 18.0, // 设置 SVG 图像的宽度
@@ -174,7 +174,7 @@ class _ChooseLoginPageState extends State<ChooseLoginPage> {
                                 )
                                     : Container(
                                   padding:
-                                  EdgeInsets.only(top: 3),
+                                  const EdgeInsets.only(top: 3),
                                   // color: Colors.red,
                                   child: SvgPicture.string(
                                     awaitYesIcon, // 替换为您自己的 SVG 图像路径
@@ -228,7 +228,7 @@ class _ChooseLoginPageState extends State<ChooseLoginPage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              PayAgreement()),
+                                              const PayAgreement()),
                                     ),
                                   },
                                   child: const Text(
@@ -256,7 +256,7 @@ class _ChooseLoginPageState extends State<ChooseLoginPage> {
                               child: agree
                                   ? Container(
                                 // color: Colors.red,
-                                padding: EdgeInsets.only(top: 3),
+                                padding: const EdgeInsets.only(top: 3),
                                 child: SvgPicture.string(
                                   yesIcon, // 替换为您自己的 SVG 图像路径
                                   width: 18.0, // 设置 SVG 图像的宽度
@@ -264,7 +264,7 @@ class _ChooseLoginPageState extends State<ChooseLoginPage> {
                                 ),
                               )
                                   : Container(
-                                padding: EdgeInsets.only(top: 3),
+                                padding: const EdgeInsets.only(top: 3),
                                 // color: Colors.red,
                                 child: SvgPicture.string(
                                   awaitYesIcon, // 替换为您自己的 SVG 图像路径
@@ -282,7 +282,7 @@ class _ChooseLoginPageState extends State<ChooseLoginPage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        UserAgreement()),
+                                        const UserAgreement()),
                               ),
                             },
                             child: const Text(
@@ -297,7 +297,7 @@ class _ChooseLoginPageState extends State<ChooseLoginPage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        PrivacyAgreement()),
+                                        const PrivacyAgreement()),
                               ),
                             },
                             child: const Text(
@@ -312,7 +312,7 @@ class _ChooseLoginPageState extends State<ChooseLoginPage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        PayAgreement()),
+                                        const PayAgreement()),
                               ),
                             },
                             child: const Text(

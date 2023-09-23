@@ -6,9 +6,9 @@ import '../component/centerAppbar.dart';
 import '../stateManage/stateManage.dart';
 
 class OptionsPage extends StatefulWidget {
-  OptionsPage({super.key,required this.childrenItem,required this.ImagesPath });
+  OptionsPage({super.key,required this.childrenItem,required this.imagesPath });
   Map childrenItem;
-  List ImagesPath;
+  List imagesPath;
 
   @override
   State<OptionsPage> createState() => _OptionsPageState();
@@ -61,11 +61,11 @@ class _OptionsPageState extends State<OptionsPage> {
               width: maxWidth,
               color: Colors.grey[200],
               child:
-              Image.network('http://192.168.0.3:9000/rc-resource/${ widget.ImagesPath[0]}',
+              Image.network('http://192.168.0.3:9000/rc-resource/${ widget.imagesPath[0]}',
                 fit: BoxFit.fitHeight,
               ),
             ),//图片
-            Padding(padding: EdgeInsets.only(bottom: 12)),
+            const Padding(padding: EdgeInsets.only(bottom: 12)),
             Container(
               width: maxWidth,
               alignment: Alignment.centerLeft,
@@ -89,13 +89,13 @@ class _OptionsPageState extends State<OptionsPage> {
                 ],
               ),
             ), //描述
-            Padding(padding: EdgeInsets.only(top: 12),),
+            const Padding(padding: EdgeInsets.only(top: 12),),
             Container(
               height: 6,
               color: Colors.grey[200],
             ),//分割线
             Container(
-              padding: EdgeInsets.only(top: 12),
+              padding:  const EdgeInsets.only(top: 12),
               height: maxHeight * 0.2,
               width: maxWidth,
               // color: Colors.blueGrey,
@@ -105,7 +105,7 @@ class _OptionsPageState extends State<OptionsPage> {
                     padding: EdgeInsets.only(left:maxWidth * 0.15 ),
                     // color: Colors.green,
                     width: maxWidth,
-                    child: Text('冷/热:'),
+                    child:  const Text('冷/热:'),
                   ), //冷热文字
                   Container(
                     padding: EdgeInsets.only(left: maxWidth * 0.15,top:14),
@@ -131,8 +131,8 @@ class _OptionsPageState extends State<OptionsPage> {
                                 width: 24.0, // 设置 SVG 图像的宽度
                                 height: 24.0, // 设置 SVG 图像的高度
                               ),
-                              Text('冷'),
-                              Padding(padding: EdgeInsets.only(right: 12),),
+                              const Text('冷'),
+                              const Padding(padding: EdgeInsets.only(right: 12),),
                             ],
                           ),
                         ),
@@ -155,7 +155,7 @@ class _OptionsPageState extends State<OptionsPage> {
                                 width: 24.0, // 设置 SVG 图像的宽度
                                 height: 24.0, // 设置 SVG 图像的高度
                               ),
-                              Text('热'),
+                              const Text('热'),
                             ],
                           ),
                         ),

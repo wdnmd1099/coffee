@@ -32,11 +32,11 @@ class _MyHomePageState extends State<HomePage> {
                   },
                   child:  Container(
                     padding:
-                    EdgeInsets.only(left: 8, top: 8, right: 4, bottom: 8),
+                    const EdgeInsets.only(left: 8, top: 8, right: 4, bottom: 8),
                     width: maxWidth / 2,
                     height: maxHeight / 4.5,
                     child: Container(
-                      color: Color.fromRGBO(158, 158, 158, 0.2),
+                      color: const Color.fromRGBO(158, 158, 158, 0.2),
                       child: Column(
                         children: [
                           Container(
@@ -50,7 +50,7 @@ class _MyHomePageState extends State<HomePage> {
                           Container(
                             padding: EdgeInsets.only(top: maxHeight * 0.01),
                             // color: Colors.yellow,
-                            child: Text(
+                            child: const Text(
                               '门店自取',
                               style: TextStyle(),
                             ),
@@ -58,7 +58,7 @@ class _MyHomePageState extends State<HomePage> {
                           Container(
                             padding: EdgeInsets.only(top: maxHeight * 0.01),
                             // color: Colors.purple,
-                            child: Text(
+                            child: const Text(
                               'PICK UP',
                               style: TextStyle(fontSize: 8),
                             ),
@@ -71,11 +71,11 @@ class _MyHomePageState extends State<HomePage> {
 
                 Container(
                   padding:
-                  EdgeInsets.only(left: 8, top: 8, right: 4, bottom: 8),
+                  const EdgeInsets.only(left: 8, top: 8, right: 4, bottom: 8),
                   width: maxWidth / 2,
                   height: maxHeight / 4.5,
                   child: Container(
-                    color: Color.fromRGBO(158, 158, 158, 0.2),
+                    color: const Color.fromRGBO(158, 158, 158, 0.2),
                     child: Column(
                       children: [
                         Container(
@@ -89,7 +89,7 @@ class _MyHomePageState extends State<HomePage> {
                         Container(
                           padding: EdgeInsets.only(top: maxHeight * 0.01),
                           // color: Colors.yellow,
-                          child: Text(
+                          child: const Text(
                             '充值优惠',
                             style: TextStyle(),
                           ),
@@ -97,7 +97,7 @@ class _MyHomePageState extends State<HomePage> {
                         Container(
                           padding: EdgeInsets.only(top: maxHeight * 0.01),
                           // color: Colors.purple,
-                          child: Text(
+                          child: const Text(
                             'DEPOSIT',
                             style: TextStyle(fontSize: 8),
                           ),
@@ -110,15 +110,15 @@ class _MyHomePageState extends State<HomePage> {
             ), //门店自取和充值优惠
             Container(
               padding:
-              EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 8),
+              const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 8),
               child: Container(
                 width: maxWidth,
                 height: maxHeight * 0.07,
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(158, 158, 158, 0.2),
+                  color: const Color.fromRGBO(158, 158, 158, 0.2),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: Color.fromRGBO(158, 158, 158, 0.2),
+                    color: const Color.fromRGBO(158, 158, 158, 0.2),
                     width: 0,
                   ),
                 ),
@@ -127,7 +127,7 @@ class _MyHomePageState extends State<HomePage> {
                     Container(
                       padding: EdgeInsets.only(left: maxWidth * 0.05),
                       // color: Colors.red,
-                      child: Icon(
+                      child: const Icon(
                         Icons.navigation,
                         size: 21,
                       ),
@@ -136,7 +136,7 @@ class _MyHomePageState extends State<HomePage> {
                       padding: EdgeInsets.only(
                           left: maxWidth <= 345? maxWidth* 0.1 :  maxWidth* 0.25
                       ),
-                      child: Text(
+                      child: const Text(
                         '江门新会第一店',
                         style: TextStyle(fontSize: 12),
                       ),
@@ -151,7 +151,7 @@ class _MyHomePageState extends State<HomePage> {
                             Container(
                               padding: EdgeInsets.only(right: 4),
                               // color:Colors.yellow,
-                              child: Icon(
+                              child: const Icon(
                                 Icons.attachment,
                                 size: 20,
                               ),
@@ -168,7 +168,7 @@ class _MyHomePageState extends State<HomePage> {
                             ),
                             Container(
                               // color:Colors.yellow,
-                              padding: EdgeInsets.only(left: 4),
+                              padding: const EdgeInsets.only(left: 4),
                               // height: maxWidth * 0.07,
                               child: const Text(
                                 '切换',
@@ -184,7 +184,7 @@ class _MyHomePageState extends State<HomePage> {
               ),
             ), //地图地址切换
             Container(
-              padding: EdgeInsets.all(8),
+              padding:const EdgeInsets.all(8),
               child: Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadiusDirectional.circular(20)),
@@ -196,7 +196,7 @@ class _MyHomePageState extends State<HomePage> {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadiusDirectional.circular(20)),

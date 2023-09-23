@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                     LengthLimitingTextInputFormatter(11), //限制只能输入11位数，以匹配手机号码
                   ],
                   keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: '手机号码',
                   ),
                   onChanged: (value) {
@@ -71,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                     LengthLimitingTextInputFormatter(6), //限制只能输入11位数，以匹配手机号码
                   ],
                   keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: '验证码',
                   ),
                   onChanged: (value) {
@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                                     // 清空路由
                                         (route) => route == null)
                                   },
-                              child: Text('登录')),
+                              child: const Text('登录')),
                         ),
                       ),
                     ),
