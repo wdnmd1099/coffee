@@ -58,9 +58,19 @@ class DrinksOptions with ChangeNotifier {
   List get getOptions => _drinksOptions;
   List get getAllData => _allData;
 
-  void addAllCount(bool addOrReduce,double currentDrinkPrice ,int currentCount){
-    addOrReduce? _allData[0]['allCount'] += currentCount: _allData[0]['allCount'] -= currentCount;
-    addOrReduce? _allData[0]['allPrice'] += currentDrinkPrice :  _allData[0]['allPrice'] -= currentDrinkPrice;
+  void computeAllCountAndPrice(){
+    _allData = [{'allCount':0,'allPrice':0.0},];
+    for(int i=0;i<_drinksOptions.length;i++){
+      _allData[0]['allPrice'] += double.parse(_drinksOptions[i]['price'].toString()) * _drinksOptions[i]['count'] ;
+      _allData[0]['allCount'] += _drinksOptions[i]['count'];
+      //count 等于零就从数据列表中删除
+      if(_drinksOptions[i]['count'] == 0){
+        _drinksOptions.remove(_drinksOptions[i]);
+      }
+    }
+
+    // addOrReduce? _allData[0]['allCount'] += currentCount: _allData[0]['allCount'] -= currentCount;
+    // addOrReduce? _allData[0]['allPrice'] += currentDrinkPrice :  _allData[0]['allPrice'] -= currentDrinkPrice;
     notifyListeners();
   }
 
@@ -68,6 +78,7 @@ class DrinksOptions with ChangeNotifier {
     _drinksOptions.add(options);
     notifyListeners();
   }
+
 
   void reset() {
     _drinksOptions = [];
