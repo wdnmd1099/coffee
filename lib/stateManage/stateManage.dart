@@ -68,9 +68,6 @@ class DrinksOptions with ChangeNotifier {
         _drinksOptions.remove(_drinksOptions[i]);
       }
     }
-
-    // addOrReduce? _allData[0]['allCount'] += currentCount: _allData[0]['allCount'] -= currentCount;
-    // addOrReduce? _allData[0]['allPrice'] += currentDrinkPrice :  _allData[0]['allPrice'] -= currentDrinkPrice;
     notifyListeners();
   }
 
@@ -78,7 +75,6 @@ class DrinksOptions with ChangeNotifier {
     _drinksOptions.add(options);
     notifyListeners();
   }
-
 
   void reset() {
     _drinksOptions = [];
