@@ -195,6 +195,7 @@ init(DrinksOptions drinksOptions){
                                   //状态管理是否为空，为空直接添加
                                   if(stateLsit.isEmpty){
                                     drinksOptions.changeOptions({
+                                      'path':widget.imagesPath,
                                       'id':widget.childrenItem['Id'],
                                       'name':widget.childrenItem['Name'],
                                       'count':1,
@@ -230,6 +231,7 @@ init(DrinksOptions drinksOptions){
                                     if(hasDrink.length == currentIdDrink){
                                       // print('创建成功！！！！');
                                       drinksOptions.changeOptions({
+                                        'path':widget.imagesPath,
                                         'id':widget.childrenItem['Id'],
                                         'name':widget.childrenItem['Name'],
                                         'count':1,
