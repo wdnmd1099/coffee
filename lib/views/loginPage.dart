@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:coffee/%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6/%E5%85%AC%E5%85%B1%E6%96%B9%E6%B3%95.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -68,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: TextFormField(
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly, //限制只能输入数字
-                    LengthLimitingTextInputFormatter(6), //限制只能输入11位数，以匹配手机号码
+                    LengthLimitingTextInputFormatter(6), //限制只能输入6位数，以匹配验证码
                   ],
                   keyboardType: TextInputType.phone,
                   decoration: const InputDecoration(
@@ -94,7 +96,14 @@ class _LoginPageState extends State<LoginPage> {
                         child: Container(
                           width: maxWidth * 0.3,
                           child: ElevatedButton(
-                            onPressed: () => {getSMSCode(_phoneNumber)},
+                            onPressed: () => {
+                              getSMSCode(_phoneNumber)
+                              .then((value) => devToast('发送成功,请查收', context))
+                              .catchError((onError){
+                                devToast('$onError', context);
+                              })
+
+                            },
                             child: const Text('获取验证码',
                                 style: TextStyle(fontSize: 12)),
                           ),
@@ -108,15 +117,20 @@ class _LoginPageState extends State<LoginPage> {
                           width: maxWidth * 0.3,
                           child: ElevatedButton(
                               onPressed: () => {
-                                    signIn(
-                                        _phoneNumber, _smsCode, authProvider),
-                                Navigator.of(context).pushAndRemoveUntil(
-                                  // 返回到指定的路由（Tabs为页面组件，需要在顶部引入，index为组件的参数)
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                        const bottomNavigationBar()),
-                                    // 清空路由
-                                        (route) => route == null)
+                                    signIn(_phoneNumber, _smsCode, authProvider)
+                                        .then((value) {Navigator.of(context)
+                                            .pushAndRemoveUntil(
+                                                // 返回到指定的路由（Tabs为页面组件，需要在顶部引入，index为组件的参数)
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const bottomNavigationBar()),
+                                                // 清空路由
+                                                (route) => route == null);
+                                        }).catchError((onError){
+
+                                      devToast('$onError', context);
+
+                                        }),
                                   },
                               child: const Text('登录')),
                         ),
@@ -159,6 +173,11 @@ class GetCode {
 }
 
 Future<dynamic> getSMSCode(_phoneNumber) async {
+  if(_phoneNumber.toString().length < 11){
+    throw '手机号码不足11位';
+  }
+
+
   GetCode gc = new GetCode(phoneNumber: _phoneNumber.toString());
   String gcStr = jsonEncode(gc.toJson());
   print(gcStr);
@@ -184,13 +203,17 @@ Future<dynamic> signIn(_phoneNumber, _smsCode, _authProvider) async {
     //下面是离线状态下的Token------------------------------
     // 这个是有订单数据的
     saveToken(
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJZCI6NywiQ29udGV4dElkIjoiNjFiYjg5NjMtY2I4MS00NmRmLWEyNjgtM2M4ZGU0MmYzNTFjIiwiRGV2aWNlIjoiIiwiT3BlcmF0b3JJZCI6NTB9.11hS2NI4xj32NS7e_uiHK4AUXrmGK1SwjZFbhmHLz6k");
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJZCI6NywiQ29udGV4dElkIjoiYzU2YmY3MTQtNzBkMS00ZDg5LThkYTQtOThlY2Y4NDlmZTlhIiwiRGV2aWNlIjoiIiwiT3BlcmF0b3JJZCI6NTB9.krBsxLxv5FBc9vvuJ9stvw3rIwK5lprYAUMzYnYksRU");
     _authProvider.login();
-    //这给是没有订单数据的
-    // saveToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcHBJZCI6NywiQ29udGV4dElkIjoiMzg5NzQ2NjctYjU3OS00YzdiLWE0OGQtNWI3NDNiZjQ1NTUyIiwiRGV2aWNlIjoiIiwiT3BlcmF0b3JJZCI6ODN9.ux_-fOF87O8QeMKyKUCFBvmVdrKxM8g5XBKG31zvbbI');
-    // _authProvider.login();
+
     //-----------------------------------------------
   } else if (onLine == true) {
+    if (_phoneNumber.toString().length < 11 ) {
+      throw '手机号码不足11位';
+    }else if( _smsCode.toString().length < 6){
+      throw '验证码不足6位';
+    }
+
     // 创建POST请求的body对象
     GetCode sI = GetCode(
         phoneNumber: _phoneNumber.toString(), smsCode: _smsCode.toString());
